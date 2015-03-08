@@ -32,7 +32,6 @@ proguard/
 /.idea/workspace.xml
 /.idea/libraries
 /.idea/tasks.xml
-/.idea/.name
 /.idea/compiler.xml
 /.idea/copyright/profiles_settings.xml
 /.idea/encodings.xml
@@ -40,6 +39,7 @@ proguard/
 /.idea/modules.xml
 /.idea/scopes/scope_settings.xml
 /.idea/vcs.xml
+/.idea/gradle.xml
 *.iml
 
 # OS-specific files
