@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center_vertical"
+    android:orientation="vertical"
+    android:paddingLeft="5dp"
+    android:paddingRight="5dp">
+
+    <TextView
+        android:id="@android:id/text1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:ellipsize="end"
+        android:singleLine="true"
+        android:textSize="@dimen/action_bar_title_text_size" />
+
+    <TextView
+        android:id="@android:id/text2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/action_bar_subtitle_top_margin"
+        android:ellipsize="end"
+        android:singleLine="true"
+        android:textSize="10sp"
+        android:textStyle="bold"/>
+
+</LinearLayout>

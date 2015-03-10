@@ -18,7 +18,8 @@ public class ToolBarSpinnerAdapter extends ArrayAdapter<String>{
     private int dropdownViewResourceId;
     private int titleViewResourceId;
 
-    public ToolBarSpinnerAdapter(Context context, int dropdownViewResourceId, int titleViewResourceId, String[] objects, CharSequence title) {
+    public ToolBarSpinnerAdapter(Context context, int dropdownViewResourceId,
+                                 int titleViewResourceId, String[] objects, CharSequence title) {
         super(context, titleViewResourceId, objects);
 
         this.title = title;
