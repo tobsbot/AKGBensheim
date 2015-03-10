@@ -1,11 +1,15 @@
 package de.akg_bensheim.akgbensheim;
 
 
+import android.app.Activity;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.WebView;
 
 
 /**
@@ -13,54 +17,121 @@ import android.view.ViewGroup;
  * Use the {@link SubstituteFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class SubstituteFragment extends Fragment {
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
+public class SubstituteFragment extends Fragment
+        implements SwipeRefreshLayout.OnRefreshListener {
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+    protected static final String URL_FIXED= "http://www.akg-bensheim.de/akgweb2011/content/Vertretung/w/%02d/w00000.htm";
+
+    //Key to the number of the week to load
+    private static final String ARG_WEEK = "int:week";
+    private int week;
+
+    private WebView webView;
+    private boolean webViewAvailable;
+    private SwipeRefreshLayout swipeRefreshLayout;
 
 
     /**
      * Use this factory method to create a new instance of
      * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
+     * @param week The week number to load
      * @return A new instance of fragment SubstituteFragment.
      */
-    // TODO: Rename and change types and number of parameters
-    public static SubstituteFragment newInstance(String param1, String param2) {
+    public static SubstituteFragment newInstance(int week) {
         SubstituteFragment fragment = new SubstituteFragment();
         Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
+        args.putInt(ARG_WEEK, week);
         fragment.setArguments(args);
         return fragment;
     }
 
+    /**
+     * Empty constructor. Use {@link #newInstance(int)}
+     * for initialization.
+     */
     public SubstituteFragment() {
         // Required empty public constructor
+        super();
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
+            week = getArguments().getInt(ARG_WEEK);
         }
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        if (webView != null) {
+            webView.destroy();
+        }
+
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_substitute, container, false);
+        swipeRefreshLayout = (SwipeRefreshLayout) inflater.inflate(R.layout.fragment_supply, container, false);
+        swipeRefreshLayout.setOnRefreshListener(this);
+
+        webView = (WebView) swipeRefreshLayout.findViewById(R.id.webview);
+        webView.getSettings().setUseWideViewPort(true);
+        webView.getSettings().setLoadWithOverviewMode(true);
+        webView.getSettings().setSupportZoom(true);
+        webView.getSettings().setBuiltInZoomControls(true);
+
+        webViewAvailable = true;
+        return swipeRefreshLayout;
     }
 
+    @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+    }
 
+    @Override
+    public void onPause() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB)
+            webView.onPause();
+        else
+            webView.pauseTimers();
+        super.onPause();
+    }
+
+    @Override
+    public void onResume() {
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB)
+            webView.onResume();
+        else
+            webView.resumeTimers();
+        super.onResume();
+    }
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
+    }
+
+    @Override
+    public void onDestroyView() {
+        webViewAvailable = false;
+        super.onDestroyView();
+    }
+
+    @Override
+    public void onDestroy() {
+        if (webView != null) {
+            webView.destroy();
+            webView = null;
+        }
+        super.onDestroy();
+    }
+
+    public WebView getWebView() {
+        return webViewAvailable ? webView : null;
+    }
+
+    @Override
+    public void onRefresh() {
+
+    }
 }
