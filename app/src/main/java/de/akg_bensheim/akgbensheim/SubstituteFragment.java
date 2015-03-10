@@ -5,11 +5,18 @@ import android.app.Activity;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.Loader;
+import android.support.v4.app.LoaderManager;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.WebView;
+import android.webkit.WebViewClient;
+
+import de.akg_bensheim.akgbensheim.net.ConnectionDetector;
+import de.akg_bensheim.akgbensheim.net.WebLoader;
 
 
 /**
@@ -18,7 +25,8 @@ import android.webkit.WebView;
  * create an instance of this fragment.
  */
 public class SubstituteFragment extends Fragment
-        implements SwipeRefreshLayout.OnRefreshListener {
+        implements SwipeRefreshLayout.OnRefreshListener,
+        LoaderManager.LoaderCallbacks<WebLoader.Response> {
 
     protected static final String URL_FIXED= "http://www.akg-bensheim.de/akgweb2011/content/Vertretung/w/%02d/w00000.htm";
 
@@ -74,6 +82,10 @@ public class SubstituteFragment extends Fragment
         swipeRefreshLayout.setOnRefreshListener(this);
 
         webView = (WebView) swipeRefreshLayout.findViewById(R.id.webview);
+        webView.setWebViewClient(new WebViewClient(){
+
+        });
+        webView.getSettings().setJavaScriptEnabled(false);
         webView.getSettings().setUseWideViewPort(true);
         webView.getSettings().setLoadWithOverviewMode(true);
         webView.getSettings().setSupportZoom(true);
@@ -132,6 +144,30 @@ public class SubstituteFragment extends Fragment
 
     @Override
     public void onRefresh() {
+        if(ConnectionDetector.getInstance(getActivity().getApplicationContext()).allowedToUseConnection("")) {
+            Bundle args = new Bundle();
+            args.putString("url", URL_FIXED);
+            getLoaderManager().restartLoader(0, args, this);
+        } else {
+            swipeRefreshLayout.setRefreshing(false);
+        }
+    }
 
+    @Override
+    public Loader<WebLoader.Response> onCreateLoader(int id, Bundle args) {
+        return new WebLoader(getActivity(), args.getString("url"));
+    }
+
+    @Override
+    public void onLoadFinished(Loader<WebLoader.Response> loader, WebLoader.Response data) {
+        webView.loadData(data.data, "text/html", "utf-8");
+
+        if(swipeRefreshLayout.isRefreshing())
+            swipeRefreshLayout.setRefreshing(false);
+    }
+
+    @Override
+    public void onLoaderReset(Loader<WebLoader.Response> loader) {
+        Log.d("onLoaderReset", "WebLoader for week " + week + " was reset!");
     }
 }
