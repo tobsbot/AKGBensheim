@@ -12,4 +12,11 @@
 
     </style>
 
+    <style name="Widget.AppTheme.ToolbarSpinner" parent="Widget.AppTheme.ToolbarSpinner.Base" />
+    <style name="Widget.AppTheme.ToolbarSpinner.Base" parent="Widget.AppCompat.Light.Spinner.DropDown.ActionBar">
+        <item name="android:background">?android:selectableItemBackground</item>
+        <item name="android:dropDownSelector">?android:selectableItemBackground</item>
+        <item name="android:divider">@null</item>
+    </style>
+
 </resources>

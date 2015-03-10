@@ -1,17 +1,35 @@
 package de.akg_bensheim.akgbensheim;
 
-import android.app.Activity;
 import android.os.Bundle;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.ActionBarActivity;
+import android.support.v7.widget.Toolbar;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Spinner;
+
+import de.akg_bensheim.akgbensheim.adapter.ToolBarSpinnerAdapter;
 
 
-public class MainActivity extends Activity {
+public class MainActivity extends ActionBarActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
+
+        Spinner spinner = (Spinner) toolbar.findViewById(R.id.dropdown);
+        spinner.setAdapter(new ToolBarSpinnerAdapter(this, R.layout.toolbar_spinner_item_dropdown,
+                R.layout.toolbar_spinner_item, new String[] {"Diese Woche", "Nächste Woche"},
+                getResources().getString(R.string.app_name))
+        );
     }
 
 
