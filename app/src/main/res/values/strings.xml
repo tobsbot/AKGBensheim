@@ -8,4 +8,5 @@
     <string name="title_substiute">Substitution</string>
     <string name="option_next_week">Next week</string>
     <string name="option_this_week">This week</string>
+    <string name="action_homepage">Homepage</string>
 </resources>

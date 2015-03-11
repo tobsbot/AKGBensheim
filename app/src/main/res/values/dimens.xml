@@ -7,5 +7,7 @@
     <dimen name="action_bar_subtitle_text_size">14dp</dimen>
     <dimen name="action_bar_subtitle_top_margin">-3dp</dimen>
     <dimen name="action_bar_subtitle_bottom_margin">5dip</dimen>
-    <dimen name="action_bar_spinner_width">156dp</dimen>
+    <dimen name="action_bar_spinner_width">150dp</dimen>
+    <dimen name="action_bar_spinner_padding">24dp</dimen>
+    <dimen name="action_bar_spinner_vertical_offset">-52dp</dimen>
 </resources>

@@ -2,12 +2,15 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="wrap_content"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:paddingLeft="@dimen/action_bar_spinner_padding"
+    android:paddingRight="@dimen/action_bar_spinner_padding"
+    android:paddingEnd="@dimen/action_bar_spinner_padding"
+    android:paddingStart="@dimen/action_bar_spinner_padding">
 
     <Spinner
         android:id="@+id/spinner"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:background="@drawable/abc_spinner_mtrl_am_alpha"
-        style="@style/Widget.AppTheme.ToolbarSpinner" />
+        style="@style/Widget.AppTheme.ToolbarSpinner"/>
 </LinearLayout>

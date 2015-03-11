@@ -15,10 +15,10 @@
     </style>
 
     <style name="Widget.AppTheme.ToolbarSpinner" parent="Widget.AppTheme.ToolbarSpinner.Base" />
-    <style name="Widget.AppTheme.ToolbarSpinner.Base" parent="Widget.AppCompat.Light.Spinner.DropDown.ActionBar">
+    <style name="Widget.AppTheme.ToolbarSpinner.Base" parent="Widget.AppCompat.Spinner.DropDown.ActionBar">
         <item name="android:background">?android:actionBarItemBackground</item>
-        <item name="android:textColorSecondary">#FFFFFFFF</item>
         <item name="android:dropDownSelector">?android:selectableItemBackground</item>
+        <item name="android:dropDownVerticalOffset">@dimen/action_bar_spinner_vertical_offset</item>
         <item name="android:divider">@null</item>
     </style>
 
@@ -27,5 +27,4 @@
         <item name="theme">@style/ThemeOverlay.AppCompat.Dark.ActionBar</item>
         <item name="popupTheme">@style/ThemeOverlay.AppCompat.Light</item>
     </style>
-
 </resources>

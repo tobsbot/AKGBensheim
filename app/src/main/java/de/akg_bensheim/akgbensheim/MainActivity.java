@@ -35,7 +35,7 @@ public class MainActivity extends ActionBarActivity
         );
         toolbar.addView(spinnerContainer, layoutParams);
 
-        ToolBarSpinnerAdapter adapter = new ToolBarSpinnerAdapter(getResources().getString(R.string.app_name));
+        ToolBarSpinnerAdapter adapter = new ToolBarSpinnerAdapter(getResources().getString(R.string.title_substiute));
         adapter.addItems(getResources().getStringArray(R.array.toolbar_spinner_items));
 
         Spinner spinner = (Spinner) spinnerContainer.findViewById(R.id.spinner);
