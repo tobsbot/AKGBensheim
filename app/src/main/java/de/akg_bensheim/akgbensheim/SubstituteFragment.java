@@ -5,8 +5,8 @@ import android.app.Activity;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.content.Loader;
 import android.support.v4.app.LoaderManager;
+import android.support.v4.content.Loader;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -79,11 +79,12 @@ public class SubstituteFragment extends Fragment
 
         // Inflate the layout for this fragment
         swipeRefreshLayout = (SwipeRefreshLayout) inflater.inflate(R.layout.fragment_supply, container, false);
+        swipeRefreshLayout.setColorSchemeResources(R.color.primary, R.color.accent, R.color.primaryDark);
         swipeRefreshLayout.setOnRefreshListener(this);
 
         webView = (WebView) swipeRefreshLayout.findViewById(R.id.webview);
         webView.setWebViewClient(new WebViewClient(){
-
+            //TODO: Add listeners and stuff
         });
         webView.getSettings().setJavaScriptEnabled(false);
         webView.getSettings().setUseWideViewPort(true);
