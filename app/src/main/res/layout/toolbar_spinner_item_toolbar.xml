@@ -2,9 +2,13 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:paddingRight="@dimen/action_bar_spinner_padding"
-    android:paddingEnd="@dimen/action_bar_spinner_padding"
     android:orientation="vertical"
+    android:paddingTop="@dimen/action_bar_spinner_view_padding"
+    android:paddingBottom="@dimen/action_bar_spinner_view_padding"
+    android:paddingLeft="@dimen/action_bar_spinner_view_padding"
+    android:paddingStart="@dimen/action_bar_spinner_view_padding"
+    android:paddingRight="@dimen/action_bar_spinner_icon_padding"
+    android:paddingEnd="@dimen/action_bar_spinner_icon_padding"
     android:background="@drawable/abc_spinner_mtrl_am_alpha">
 
     <TextView
@@ -22,7 +26,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/action_bar_subtitle_top_margin"
         android:fontFamily="sans-serif"
-        android:textColor="@color/abc_secondary_text_material_dark"
+        android:textColor="@color/secondaryTextInverse"
         android:textSize="12sp"
         android:textStyle="bold"/>
 </LinearLayout>

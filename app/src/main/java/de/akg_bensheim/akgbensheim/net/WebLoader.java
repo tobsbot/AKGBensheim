@@ -13,7 +13,7 @@ import java.util.Date;
 import de.akg_bensheim.akgbensheim.R;
 
 /**
- * Created by tobiaserthal on 10.03.15.
+ * A simple AsyncTaskLoader to get data from a HTTP connection.
  */
 public class WebLoader extends AsyncTaskLoader<WebLoader.Response> {
     private Response data;

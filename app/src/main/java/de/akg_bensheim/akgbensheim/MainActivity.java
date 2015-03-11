@@ -15,7 +15,6 @@ import android.widget.Spinner;
 
 import de.akg_bensheim.akgbensheim.adapter.ToolBarSpinnerAdapter;
 
-
 public class MainActivity extends ActionBarActivity
         implements Spinner.OnItemSelectedListener {
 
@@ -43,6 +42,9 @@ public class MainActivity extends ActionBarActivity
         spinner.setOnItemSelectedListener(this);
     }
 
+    protected void onViewCreated() {
+
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
