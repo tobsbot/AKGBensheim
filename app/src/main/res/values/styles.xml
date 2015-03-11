@@ -16,7 +16,7 @@
 
     <style name="Widget.AppTheme.ToolbarSpinner" parent="Widget.AppTheme.ToolbarSpinner.Base" />
     <style name="Widget.AppTheme.ToolbarSpinner.Base" parent="Widget.AppCompat.Spinner.DropDown.ActionBar">
-        <item name="android:background">?android:actionBarItemBackground</item>
+        <item name="android:background">@drawable/actionbar_ripple</item>
         <item name="android:dropDownSelector">?android:selectableItemBackground</item>
         <item name="android:dropDownVerticalOffset">@dimen/action_bar_spinner_vertical_offset</item>
         <item name="android:divider">@null</item>
