@@ -18,7 +18,8 @@
         android:fontFamily="sans-serif"
         android:textColor="@color/primaryTextInverse"
         android:textSize="18sp"
-        android:textStyle="normal"/>
+        android:textStyle="normal"
+        android:text="@string/title_substitute"/>
 
     <TextView
         android:id="@android:id/text2"
@@ -28,5 +29,6 @@
         android:fontFamily="sans-serif"
         android:textColor="@color/secondaryTextInverse"
         android:textSize="12sp"
-        android:textStyle="bold"/>
+        android:textStyle="bold"
+        android:text="@string/option_next_week" />
 </LinearLayout>
