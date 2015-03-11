@@ -4,17 +4,20 @@ import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.Spinner;
 
 import de.akg_bensheim.akgbensheim.adapter.ToolBarSpinnerAdapter;
 
 
-public class MainActivity extends ActionBarActivity {
+public class MainActivity extends ActionBarActivity
+        implements Spinner.OnItemSelectedListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,11 +28,19 @@ public class MainActivity extends ActionBarActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
 
-        Spinner spinner = (Spinner) toolbar.findViewById(R.id.dropdown);
-        spinner.setAdapter(new ToolBarSpinnerAdapter(this, R.layout.toolbar_spinner_item_dropdown,
-                R.layout.toolbar_spinner_item, new String[] {"Diese Woche", "Nächste Woche"},
-                getResources().getString(R.string.app_name))
+        View spinnerContainer = LayoutInflater.from(this)
+                .inflate(R.layout.toolbar_spinner, toolbar, false);
+        ActionBar.LayoutParams layoutParams = new ActionBar.LayoutParams(
+                ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT
         );
+        toolbar.addView(spinnerContainer, layoutParams);
+
+        ToolBarSpinnerAdapter adapter = new ToolBarSpinnerAdapter(getResources().getString(R.string.app_name));
+        adapter.addItems(getResources().getStringArray(R.array.toolbar_spinner_items));
+
+        Spinner spinner = (Spinner) spinnerContainer.findViewById(R.id.spinner);
+        spinner.setAdapter(adapter);
+        spinner.setOnItemSelectedListener(this);
     }
 
 
@@ -53,5 +64,15 @@ public class MainActivity extends ActionBarActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+        Log.d("MainActivity", "Spinner item at index: " + position + " selected.");
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> parent) {
+        Log.d("MainActivity", "No spinner item item selected.");
     }
 }

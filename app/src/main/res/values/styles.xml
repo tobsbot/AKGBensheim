@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Application theme. -->
     <style name="AppTheme" parent="AppTheme.Base" />
 
@@ -14,9 +14,25 @@
 
     <style name="Widget.AppTheme.ToolbarSpinner" parent="Widget.AppTheme.ToolbarSpinner.Base" />
     <style name="Widget.AppTheme.ToolbarSpinner.Base" parent="Widget.AppCompat.Light.Spinner.DropDown.ActionBar">
-        <item name="android:background">?android:selectableItemBackground</item>
+        <item name="android:background">?android:actionBarItemBackground</item>
+        <item name="android:textColorSecondary">#FFFFFFFF</item>
         <item name="android:dropDownSelector">?android:selectableItemBackground</item>
         <item name="android:divider">@null</item>
+    </style>
+
+    <style name="Widget.AppTheme.ActionBar" parent="Widget.AppCompat.ActionBar">
+        <item name="android:background">@color/primary</item>
+        <item name="theme">@style/ThemeOverlay.AppTheme.ActionBar</item>
+        <item name="popupTheme">@style/ThemeOverlay.AppCompat.Light</item>
+
+        <item name="colorControlNormal">#FFFFFFFF</item>
+        <!-- tools:ignore="NewApi" to shut IDE up -->
+        <!-- on API 21 the overflow icon ignores colorControlNormal attr in favor of the native version -->
+        <item name="android:colorControlNormal" tools:ignore="NewApi">?colorControlNormal</item>
+    </style>
+
+    <style name="ThemeOverlay.AppTheme.ActionBar" parent="ThemeOverlay.AppCompat.ActionBar">
+        <item name="android:textColorPrimary">@color/primaryTextInverse</item>
     </style>
 
 </resources>

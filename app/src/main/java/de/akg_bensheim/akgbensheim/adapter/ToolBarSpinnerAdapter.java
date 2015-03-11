@@ -4,81 +4,84 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
+import android.widget.BaseAdapter;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Locale;
 
-/**
- * Created by tobiaserthal on 10.03.15.
- */
-public class ToolBarSpinnerAdapter extends ArrayAdapter<String>{
+import de.akg_bensheim.akgbensheim.R;
+
+public class ToolBarSpinnerAdapter extends BaseAdapter{
 
     private CharSequence title;
-    private int dropdownViewResourceId;
-    private int titleViewResourceId;
+    private ArrayList<String> items;
 
-    public ToolBarSpinnerAdapter(Context context, int dropdownViewResourceId,
-                                 int titleViewResourceId, String[] objects, CharSequence title) {
-        super(context, titleViewResourceId, objects);
-
+    public ToolBarSpinnerAdapter(String title) {
+        super();
         this.title = title;
-        this.dropdownViewResourceId = dropdownViewResourceId;
-        this.titleViewResourceId = titleViewResourceId;
+        this.items = new ArrayList<>();
+    }
+
+    public void addItem(String title) {
+        items.add(title);
+    }
+
+    public void addItems(String[] titles) {
+        Collections.addAll(items, titles);
+    }
+
+    public void clear() {
+        items.clear();
+    }
+
+    @Override
+    public int getCount() {
+        return items.size();
+    }
+
+    @Override
+    public Object getItem(int index) {
+        return items.get(index);
+    }
+
+    public String getTitle(int index) {
+        return index >= 0 && index < getCount() ?
+                getItem(index).toString() : "";
+    }
+
+    @Override
+    public long getItemId(int index) {
+        return index;
     }
 
     @Override
     public View getDropDownView(int position, View convertView, ViewGroup parent) {
-        LayoutInflater inflater = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-
-        DropdownHolder holder;
-
-        if(convertView == null) {
-            convertView = inflater.inflate(dropdownViewResourceId, null);
-            holder = new DropdownHolder();
-            holder.txt01 = (TextView) convertView.findViewById(android.R.id.text1);
-
-            convertView.setTag(holder);
-        } else {
-            holder = (DropdownHolder) convertView.getTag();
+        if(convertView == null || !convertView.getTag().toString().equals("DROPDOWN")) {
+            convertView = ((LayoutInflater) parent.getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE))
+                    .inflate(R.layout.toolbar_spinner_item_dropdown, parent, false);
+            convertView.setTag("DROPDOWN");
         }
 
-        holder.txt01.setText(getItem(position));
+        TextView textView = (TextView) convertView.findViewById(android.R.id.text1);
+        textView.setText(getTitle(position));
         return convertView;
     }
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        LayoutInflater inflater = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-
-        ViewHolder holder;
-
-        if (convertView == null) {
-            convertView = inflater.inflate(titleViewResourceId, null);
-            holder = new ViewHolder();
-            holder.txt01 = (TextView) convertView.findViewById(android.R.id.text1);
-            holder.txt02 = (TextView) convertView.findViewById(android.R.id.text2);
-
-            convertView.setTag(holder);
-
-        } else {
-            holder = (ViewHolder) convertView.getTag();
+        if (convertView == null || !convertView.getTag().toString().equals("NON_DROPDOWN")) {
+            convertView = ((LayoutInflater) parent.getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE))
+                    .inflate(R.layout.toolbar_spinner_item_toolbar, parent, false);
+            convertView.setTag("NON_DROPDOWN");
         }
 
-        holder.txt01.setText(title);
-        holder.txt02.setText(getItem(position).toUpperCase(Locale.GERMANY));
+        TextView textView1 = (TextView) convertView.findViewById(android.R.id.text1);
+        textView1.setText(title);
 
-        holder.txt02.setTextColor(getContext().getResources().getColor(android.R.color.secondary_text_light));
-
+        TextView textView2 = (TextView) convertView.findViewById(android.R.id.text2);
+        textView2.setText(getTitle(position).toUpperCase(Locale.getDefault()));
         return convertView;
-    }
-
-    class ViewHolder {
-        TextView txt01;
-        TextView txt02;
-    }
-
-    class DropdownHolder {
-        TextView txt01;
     }
 }
