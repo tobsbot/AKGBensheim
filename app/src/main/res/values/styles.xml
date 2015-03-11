@@ -1,4 +1,4 @@
-<resources xmlns:tools="http://schemas.android.com/tools">
+<resources>
     <!-- Application theme. -->
     <style name="AppTheme" parent="AppTheme.Base" />
 
@@ -10,6 +10,8 @@
         <item name="colorPrimaryDark">@color/primaryDark</item>
         <item name="colorAccent">@color/accent</item>
 
+        <!-- Style the toolbar -->
+        <item name="toolbarStyle">@style/Widget.AppTheme.ActionBar</item>
     </style>
 
     <style name="Widget.AppTheme.ToolbarSpinner" parent="Widget.AppTheme.ToolbarSpinner.Base" />
@@ -22,17 +24,8 @@
 
     <style name="Widget.AppTheme.ActionBar" parent="Widget.AppCompat.ActionBar">
         <item name="android:background">@color/primary</item>
-        <item name="theme">@style/ThemeOverlay.AppTheme.ActionBar</item>
+        <item name="theme">@style/ThemeOverlay.AppCompat.Dark.ActionBar</item>
         <item name="popupTheme">@style/ThemeOverlay.AppCompat.Light</item>
-
-        <item name="colorControlNormal">#FFFFFFFF</item>
-        <!-- tools:ignore="NewApi" to shut IDE up -->
-        <!-- on API 21 the overflow icon ignores colorControlNormal attr in favor of the native version -->
-        <item name="android:colorControlNormal" tools:ignore="NewApi">?colorControlNormal</item>
-    </style>
-
-    <style name="ThemeOverlay.AppTheme.ActionBar" parent="ThemeOverlay.AppCompat.ActionBar">
-        <item name="android:textColorPrimary">@color/primaryTextInverse</item>
     </style>
 
 </resources>
