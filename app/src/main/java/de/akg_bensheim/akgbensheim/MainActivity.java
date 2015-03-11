@@ -42,10 +42,6 @@ public class MainActivity extends ActionBarActivity
         spinner.setOnItemSelectedListener(this);
     }
 
-    protected void onViewCreated() {
-
-    }
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
