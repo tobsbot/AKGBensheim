@@ -249,10 +249,18 @@ public class MainActivity extends ActionBarActivity
             return response;
         }
 
+        @Override
         protected void onPostExecute(Loader.Response response) {
             switch (response.code) {
                 case 200:
                     webView.loadUrl(url);
+
+                    Toast.makeText(
+                            MainActivity.this,
+                            new SimpleDateFormat(getResources().getString(R.string.last_modification), Locale.getDefault())
+                                    .format(new Date(response.lastModified)),
+                            Toast.LENGTH_SHORT
+                    ).show();
                     break;
                 case 301:
                     webView.loadData(CODE_301, "text/html", "UTF-8");
@@ -270,13 +278,6 @@ public class MainActivity extends ActionBarActivity
                     webView.loadData(customHtml, "text/html", "UTF-8");
                     break;
             }
-
-            Toast.makeText(
-                    MainActivity.this,
-                    new SimpleDateFormat("", Locale.getDefault())
-                            .format(new Date(response.lastModified)),
-                    Toast.LENGTH_SHORT
-            ).show();
         }
     }
 }
