@@ -17,11 +17,14 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.AdapterView;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.Locale;
 
 import de.akg_bensheim.akgbensheim.adapter.ToolBarSpinnerAdapter;
@@ -52,9 +55,6 @@ public class MainActivity extends ActionBarActivity
             fromSavedInstanceState = true;
         }
 
-        if (webView != null)
-            webView.destroy();
-
         /* View id lookup */
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         swipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipeRefreshLayout);
@@ -79,7 +79,8 @@ public class MainActivity extends ActionBarActivity
         /* Set up the Spinner */
         spinner = (Spinner) spinnerContainer.findViewById(R.id.spinner);
         spinner.setAdapter(adapter);
-        spinner.setSelection(selectedIndex);
+        if(!fromSavedInstanceState)
+            spinner.setSelection(selectedIndex);
         spinner.setOnItemSelectedListener(this);
 
         /* Set up swipeToRefreshLayout */
@@ -90,15 +91,17 @@ public class MainActivity extends ActionBarActivity
         webView.setWebViewClient(new WebViewClient() {
             public void onPageFinished(WebView view, String url) {
                 swipeRefreshLayout.setRefreshing(false);
+                spinner.setEnabled(true);
             }
         });
-        webView.getSettings().setJavaScriptEnabled(false);
+
         webView.getSettings().setUseWideViewPort(true);
         webView.getSettings().setLoadWithOverviewMode(true);
+        webView.getSettings().setJavaScriptEnabled(false);
         webView.getSettings().setSupportZoom(true);
         webView.getSettings().setBuiltInZoomControls(true);
 
-        if(Build.VERSION.SDK_INT > Build.VERSION_CODES.HONEYCOMB)
+        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.HONEYCOMB)
             webView.getSettings().setDisplayZoomControls(false);
     }
 
@@ -152,15 +155,26 @@ public class MainActivity extends ActionBarActivity
     }
 
     @Override
+    public void onRestoreInstanceState(Bundle inState) {
+        super.onRestoreInstanceState(inState);
+        webView.restoreState(inState);
+    }
+
+    @Override
     public void onSaveInstanceState(Bundle outState) {
-        outState.putInt(KEY_SELECTED_INDEX, selectedIndex);
         super.onSaveInstanceState(outState);
+        webView.saveState(outState);
+        outState.putInt(KEY_SELECTED_INDEX, selectedIndex);
     }
 
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
         Log.d("MainActivity", "Spinner item at index: " + position + " selected.");
-        swipeRefreshLayout.setRefreshing(true);
+
+        if(fromSavedInstanceState) {
+            fromSavedInstanceState = false;
+            return;
+        }
         selectedIndex = position;
 
         Calendar calendar = Calendar.getInstance(Locale.getDefault());
@@ -174,6 +188,7 @@ public class MainActivity extends ActionBarActivity
                 break;
         }
 
+        Log.d("MainActivity", "Starting Loader...");
         new Loader().execute(
                 String.format(URL_FIXED, week)
         );
@@ -208,6 +223,7 @@ public class MainActivity extends ActionBarActivity
 
         @Override
         protected void onPreExecute() {
+            swipeRefreshLayout.setRefreshing(true);
             spinner.setEnabled(false);
         }
 
@@ -254,7 +270,13 @@ public class MainActivity extends ActionBarActivity
                     webView.loadData(customHtml, "text/html", "UTF-8");
                     break;
             }
-            spinner.setEnabled(true);
+
+            Toast.makeText(
+                    MainActivity.this,
+                    new SimpleDateFormat("", Locale.getDefault())
+                            .format(new Date(response.lastModified)),
+                    Toast.LENGTH_SHORT
+            ).show();
         }
     }
 }
