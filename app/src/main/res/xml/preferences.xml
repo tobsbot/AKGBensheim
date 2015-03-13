@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    <PreferenceCategory
+        android:title="@string/pref_data_usage"
+        android:key="pref_key_data_usage_settings">
+        <CheckBoxPreference
+            android:key="pref_key_only_wifi"
+            android:summary="@string/pref_summary_only_wifi"
+            android:title="@string/pref_only_wifi"
+            android:defaultValue="false" />
+
+        <CheckBoxPreference
+            android:key="pref_key_force_load"
+            android:summary="@string/pref_summary_force_load"
+            android:title="@string/pref_force_load"
+            android:defaultValue="false" />
+    </PreferenceCategory>
+    <PreferenceCategory
+        android:title="@string/pref_about"
+        android:key="pref_key_about">
+        <Preference
+            android:key="pref_key_website"
+            android:title="@string/pref_website" />
+        <Preference
+            android:key="pref_key_licence"
+            android:title="@string/pref_licence"
+            android:summary="@string/pref_summary_licence"/>
+        <Preference
+            android:key="pref_key_version"
+            android:title="@string/app_name" />
+    </PreferenceCategory>
+</PreferenceScreen>
