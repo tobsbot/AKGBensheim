@@ -5,12 +5,22 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
+    <!-- RefreshLayout to hold the WebView -->
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/swipeRefreshLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="?attr/actionBarSize">
+
+        <!-- WebView to display contents -->
+        <WebView
+            android:id="@+id/webView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </android.support.v4.widget.SwipeRefreshLayout>
+
+    <!-- lay the toolbar on top -->
     <include layout="@layout/toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
-
-    <TextView
-        android:text="@string/hello_world"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
 </RelativeLayout>
