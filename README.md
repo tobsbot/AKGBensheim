@@ -1,4 +1,4 @@
-# AKGBensheim
+# AKG Bensheim
 A gradle-only port of the AKGApp created by averageapps.
 
 *Note to non-German-speakers who might land here and wonder what this is:
