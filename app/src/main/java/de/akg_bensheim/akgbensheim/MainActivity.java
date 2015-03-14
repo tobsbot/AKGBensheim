@@ -37,7 +37,7 @@ public class MainActivity extends ActionBarActivity
         implements Spinner.OnItemSelectedListener, SwipeRefreshLayout.OnRefreshListener {
 
     private static final String KEY_SELECTED_INDEX = "selected_index";
-    protected static final String URL_FIXED= "http://www.akg-bensheim.de/akgweb2011/content/Vertretung/w/%02d/w00000.htm";
+    private static final String URL_FIXED= "http://www.akg-bensheim.de/akgweb2011/content/Vertretung/w/%02d/w00000.htm";
 
     private int selectedIndex = 0;
     private boolean fromSavedInstanceState;
