@@ -223,9 +223,9 @@ public class MainActivity extends ActionBarActivity
             long lastModified;
         }
 
-        private static final String CODE_301 = "<html><body><font size=6>Vertretungsplan f&uumlr diese Woche nicht verf&uuml;gbar!</font></body></html>";
-        private static final String CODE_404 = "<html><body><font size=6>404 Not Found: Vertretungsplan f&uuml;r diese Woche nicht verf&uumlgbar!</font></body></html>";
-        private static final String CODE_1 = "<html><body><font size=6>Verbindungsfehler.<br>Bitte Internetverbindung &uuml;berpr&uuml;fen.</font></body></html>";
+        private static final String CODE_301 = "file:///android_asset/error/301.html";
+        private static final String CODE_404 = "file:///android_asset/error/404.html";
+        private static final String CODE_1 = "file:///android_asset/error/offline.html";
 
 
         @Override
@@ -270,13 +270,13 @@ public class MainActivity extends ActionBarActivity
                     ).show();
                     break;
                 case 301:
-                    webView.loadData(CODE_301, "text/html", "UTF-8");
+                    webView.loadUrl(CODE_301);
                     break;
                 case 404:
-                    webView.loadData(CODE_404, "text/html", "UTF-8");
+                    webView.loadUrl(CODE_404);
                     break;
                 case -1:
-                    webView.loadData(CODE_1, "text/html", "UTF-8");
+                    webView.loadUrl(CODE_1);
                     break;
                 default:
                     String customHtml = "<html><body><font size=6>Unbekannter Fehler. Code: "
