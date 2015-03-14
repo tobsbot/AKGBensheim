@@ -1,8 +1,10 @@
 package de.akg_bensheim.akgbensheim;
 
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
@@ -28,13 +30,14 @@ import java.util.Date;
 import java.util.Locale;
 
 import de.akg_bensheim.akgbensheim.adapter.ToolBarSpinnerAdapter;
-import de.akg_bensheim.akgbensheim.net.ConnectionDetector;
+import de.akg_bensheim.akgbensheim.preferences.SettingsActivity;
+import de.akg_bensheim.akgbensheim.utils.ConnectionDetector;
 
 public class MainActivity extends ActionBarActivity
         implements Spinner.OnItemSelectedListener, SwipeRefreshLayout.OnRefreshListener {
 
     private static final String KEY_SELECTED_INDEX = "selected_index";
-    protected static final String URL_FIXED= "http://www.akg-bensheim.de/akgweb2011/content/Vertretung/w/%02d/w00000.htm";
+    private static final String URL_FIXED = "http://www.akg-bensheim.de/akgweb2011/content/Vertretung/w/%02d/w00000.htm";
 
     private int selectedIndex = 0;
     private boolean fromSavedInstanceState;
@@ -89,9 +92,15 @@ public class MainActivity extends ActionBarActivity
 
         /* Set up webView */
         webView.setWebViewClient(new WebViewClient() {
+            @Override
             public void onPageFinished(WebView view, String url) {
                 swipeRefreshLayout.setRefreshing(false);
                 spinner.setEnabled(true);
+            }
+
+            @Override
+            public boolean shouldOverrideUrlLoading(WebView view, String url) {
+                return !url.startsWith("#");
             }
         });
 
@@ -103,6 +112,13 @@ public class MainActivity extends ActionBarActivity
 
         if (Build.VERSION.SDK_INT > Build.VERSION_CODES.HONEYCOMB)
             webView.getSettings().setDisplayZoomControls(false);
+
+        webView.post(new Runnable() {
+            @Override
+            public void run() {
+                webView.zoomOut();
+            }
+        });
     }
 
     @Override
@@ -117,14 +133,15 @@ public class MainActivity extends ActionBarActivity
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
+        switch (item.getItemId()) {
+            case R.id.action_settings:
+                startActivity(
+                        new Intent(MainActivity.this, SettingsActivity.class)
+                );
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
         }
-
-        return super.onOptionsItemSelected(item);
     }
 
     @Override
@@ -155,13 +172,13 @@ public class MainActivity extends ActionBarActivity
     }
 
     @Override
-    public void onRestoreInstanceState(Bundle inState) {
+    public void onRestoreInstanceState(@NonNull Bundle inState) {
         super.onRestoreInstanceState(inState);
         webView.restoreState(inState);
     }
 
     @Override
-    public void onSaveInstanceState(Bundle outState) {
+    public void onSaveInstanceState(@NonNull Bundle outState) {
         super.onSaveInstanceState(outState);
         webView.saveState(outState);
         outState.putInt(KEY_SELECTED_INDEX, selectedIndex);
@@ -188,10 +205,11 @@ public class MainActivity extends ActionBarActivity
                 break;
         }
 
-        Log.d("MainActivity", "Starting Loader...");
-        new Loader().execute(
-                String.format(URL_FIXED, week)
-        );
+        if(ConnectionDetector.getInstance(getApplicationContext())
+                .allowedToUseConnection("pref_key_only_wifi"))
+            new Loader().execute(
+                    String.format(URL_FIXED, week)
+            );
     }
 
     @Override
@@ -201,7 +219,8 @@ public class MainActivity extends ActionBarActivity
 
     @Override
     public void onRefresh() {
-        if(ConnectionDetector.getInstance(getApplicationContext()).allowedToUseConnection(""))
+        if(ConnectionDetector.getInstance(getApplicationContext())
+                .allowedToUseConnection("pref_key_only_wifi"))
            new Loader().execute(
                    String.format(URL_FIXED, week)
            );
@@ -214,15 +233,24 @@ public class MainActivity extends ActionBarActivity
         class Response {
             int code;
             long lastModified;
+
+            @Override
+            public String toString() {
+                return getClass().getSimpleName()
+                        + " [code=" + code
+                        + ", lastModified=" + lastModified
+                        + "]";
+            }
         }
 
-        private static final String CODE_301 = "<html><body><font size=6>Vertretungsplan f&uumlr diese Woche nicht verf&uuml;gbar!</font></body></html>";
-        private static final String CODE_404 = "<html><body><font size=6>404 Not Found: Vertretungsplan f&uuml;r diese Woche nicht verf&uumlgbar!</font></body></html>";
-        private static final String CODE_1 = "<html><body><font size=6>Verbindungsfehler.<br>Bitte Internetverbindung &uuml;berpr&uuml;fen.</font></body></html>";
-
+        private static final String CODE_301 = "file:///android_asset/error/301.html";
+        private static final String CODE_404 = "file:///android_asset/error/404.html";
+        private static final String CODE_1 = "file:///android_asset/error/offline.html";
+        private static final String CODE_UNKNOWN = "file:///android_asset/error/unknown.html";
 
         @Override
         protected void onPreExecute() {
+            Log.d("MainActivity", "Starting Loader...");
             swipeRefreshLayout.setRefreshing(true);
             spinner.setEnabled(false);
         }
@@ -244,13 +272,14 @@ public class MainActivity extends ActionBarActivity
                 connection.disconnect();
             } catch (IOException e) {
                 Log.e("Loader", "IOException occurred while connecting to: \"" + url + "\"", e);
-                response.code = -1;
+                response.code = 1;
             }
             return response;
         }
 
         @Override
         protected void onPostExecute(Loader.Response response) {
+            Log.d("MainActivity", "Loader finished with result: " + response.toString());
             switch (response.code) {
                 case 200:
                     webView.loadUrl(url);
@@ -263,19 +292,16 @@ public class MainActivity extends ActionBarActivity
                     ).show();
                     break;
                 case 301:
-                    webView.loadData(CODE_301, "text/html", "UTF-8");
+                    webView.loadUrl(CODE_301);
                     break;
                 case 404:
-                    webView.loadData(CODE_404, "text/html", "UTF-8");
+                    webView.loadUrl(CODE_404);
                     break;
-                case -1:
-                    webView.loadData(CODE_1, "text/html", "UTF-8");
+                case 1:
+                    webView.loadUrl(CODE_1);
                     break;
                 default:
-                    String customHtml = "<html><body><font size=6>Unbekannter Fehler. Code: "
-                            + response.code
-                            + "<br>Bitte Entwickler kontaktieren und Code mitteilen.</font></body></html>";
-                    webView.loadData(customHtml, "text/html", "UTF-8");
+                    webView.loadUrl(CODE_UNKNOWN);
                     break;
             }
         }
