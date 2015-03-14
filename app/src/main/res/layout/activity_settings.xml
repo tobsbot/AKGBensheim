@@ -9,7 +9,9 @@
         android:name="de.akg_bensheim.akgbensheim.preferences.SettingsFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="?attr/actionBarSize"/>
+        android:layout_marginTop="?attr/actionBarSize"
+        android:layout_marginLeft="@dimen/preference_fragment_margin"
+        android:layout_marginRight="@dimen/preference_fragment_margin"/>
 
     <!-- lay the toolbar on top -->
     <include layout="@layout/toolbar"

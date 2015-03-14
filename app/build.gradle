@@ -17,16 +17,20 @@ android {
             minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
+        debug {
+            debuggable true
+        }
+    }
+    lintOptions {
+        abortOnError false
     }
 }
-
-
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
 
     //support libraries
-    compile 'com.android.support:appcompat-v7:21.0.3'
-    compile 'com.android.support:support-v4:21.0.3'
+    compile 'com.android.support:appcompat-v7:22.0.0'
+    compile 'com.android.support:support-v4:22.0.0'
     compile 'com.github.machinarius:preferencefragment:0.1.1'
 }
