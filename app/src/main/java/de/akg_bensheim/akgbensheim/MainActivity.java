@@ -106,6 +106,13 @@ public class MainActivity extends ActionBarActivity
 
         if (Build.VERSION.SDK_INT > Build.VERSION_CODES.HONEYCOMB)
             webView.getSettings().setDisplayZoomControls(false);
+
+        webView.post(new Runnable() {
+            @Override
+            public void run() {
+                webView.zoomOut();
+            }
+        });
     }
 
     @Override
@@ -164,12 +171,6 @@ public class MainActivity extends ActionBarActivity
     public void onRestoreInstanceState(@NonNull Bundle inState) {
         super.onRestoreInstanceState(inState);
         webView.restoreState(inState);
-        webView.post(new Runnable() {
-            @Override
-            public void run() {
-                webView.zoomOut();
-            }
-        });
     }
 
     @Override
