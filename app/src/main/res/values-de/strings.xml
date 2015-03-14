@@ -21,5 +21,7 @@
     <string name="pref_website">AKG Website</string>
     <string name="pref_licence">Lizenzen</string>
     <string name="pref_summary_licence">Rechtliche Hinweise zu Lizenzen</string>
-    <string name="pref_version">AKG Bensheim</string>
+    <string name="pref_version">@string/app_name</string>
+    <string name="pref_summary_version">Version %s</string>
+    <string name="dialog_title_licence">Lizenzen</string>
 </resources>

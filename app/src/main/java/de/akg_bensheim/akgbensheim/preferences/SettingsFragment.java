@@ -4,7 +4,6 @@ import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.preference.Preference;
-import android.support.v4.app.FragmentActivity;
 import android.util.Log;
 
 import com.github.machinarius.preferencefragment.PreferenceFragment;
@@ -21,7 +20,8 @@ public class SettingsFragment extends PreferenceFragment{
         addPreferencesFromResource(R.xml.preferences);
 
         pref_website = findPreference("pref_key_website");
-        pref_website.setEnabled(ConnectionDetector.getInstance(this.getActivity()).allowedToUseConnection("pref_key_only_wifi"));
+        pref_website.setEnabled(ConnectionDetector.getInstance(getActivity())
+                .allowedToUseConnection("pref_key_only_wifi"));
         pref_website.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
             @Override
             public boolean onPreferenceClick(Preference preference) {
@@ -36,17 +36,21 @@ public class SettingsFragment extends PreferenceFragment{
         pref_licence.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
             @Override
             public boolean onPreferenceClick(Preference preference) {
-                SettingsDialogs.showLicence((FragmentActivity) SettingsFragment.this.getActivity());
+                SettingsDialogs.showLicence(getActivity());
                 return true;
             }
         });
 
         Preference pref_about = findPreference("pref_key_version");
         try {
-            pref_about.setSummary("Version " + getActivity().getPackageManager().getPackageInfo(
-                    getActivity().getPackageName(), 0).versionName);
+            pref_about.setSummary(
+                    String.format(
+                            getResources().getString(R.string.pref_summary_version),
+                            getActivity().getPackageManager().getPackageInfo(getActivity().getPackageName(), 0).versionName
+                    )
+            );
         } catch (PackageManager.NameNotFoundException e) {
-            Log.e("AppSettingsFragment", "Unable to resolve package name", e);
+            Log.e("SettingsFragment", "Unable to resolve package name", e);
             e.printStackTrace();
         }
 
@@ -55,7 +59,7 @@ public class SettingsFragment extends PreferenceFragment{
 
             @Override
             public boolean onPreferenceChange(Preference preference, Object newValue) {
-                pref_website.setEnabled(ConnectionDetector.getInstance(SettingsFragment.this.getActivity())
+                pref_website.setEnabled(ConnectionDetector.getInstance(getActivity())
                         .allowedToUseConnection("pref_key_only_wifi"));
                 return true;
             }

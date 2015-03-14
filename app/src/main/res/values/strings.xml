@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">AKG</string>
+    <string name="app_name">AKG Bensheim</string>
 
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
@@ -18,7 +18,8 @@
     <string name="pref_summary_force_load">Forces to refresh, even if not neccessary</string>
     <string name="pref_summary_licence">Show Licence Agreements</string>
     <string name="pref_summary_only_wifi">Only refresh via wifi to save costs</string>
-    <string name="pref_version">AKG Bensheim</string>
+    <string name="pref_version">@string/app_name</string>
     <string name="pref_website">AKG Homepage</string>
     <string name="dialog_title_licence">Licence</string>
+    <string name="pref_summary_version">Version %s</string>
 </resources>
