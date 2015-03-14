@@ -201,7 +201,6 @@ public class MainActivity extends ActionBarActivity
                 break;
         }
 
-        Log.d("MainActivity", "Starting Loader...");
         new Loader().execute(
                 String.format(URL_FIXED, week)
         );
@@ -227,15 +226,23 @@ public class MainActivity extends ActionBarActivity
         class Response {
             int code;
             long lastModified;
+
+            @Override
+            public String toString() {
+                return getClass().getSimpleName()
+                        + " [code=" + code
+                        + ", lastModified=" + lastModified
+                        + "]";
+            }
         }
 
         private static final String CODE_301 = "file:///android_asset/error/301.html";
         private static final String CODE_404 = "file:///android_asset/error/404.html";
         private static final String CODE_1 = "file:///android_asset/error/offline.html";
 
-
         @Override
         protected void onPreExecute() {
+            Log.d("MainActivity", "Starting Loader...");
             swipeRefreshLayout.setRefreshing(true);
             spinner.setEnabled(false);
         }
@@ -264,6 +271,7 @@ public class MainActivity extends ActionBarActivity
 
         @Override
         protected void onPostExecute(Loader.Response response) {
+            Log.d("MainActivity", "Loader finished with result: " + response.toString());
             switch (response.code) {
                 case 200:
                     webView.loadUrl(url);

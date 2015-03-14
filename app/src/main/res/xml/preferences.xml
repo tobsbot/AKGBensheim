@@ -8,12 +8,6 @@
             android:summary="@string/pref_summary_only_wifi"
             android:title="@string/pref_only_wifi"
             android:defaultValue="false" />
-
-        <CheckBoxPreference
-            android:key="pref_key_force_load"
-            android:summary="@string/pref_summary_force_load"
-            android:title="@string/pref_force_load"
-            android:defaultValue="false" />
     </PreferenceCategory>
     <PreferenceCategory
         android:title="@string/pref_about"

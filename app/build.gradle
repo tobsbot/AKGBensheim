@@ -24,10 +24,7 @@ android {
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
 
-    //Support libraries
-    
-
-    //Third party support libraries
+    //support libraries
     compile 'com.android.support:appcompat-v7:21.0.3'
     compile 'com.android.support:support-v4:21.0.3'
     compile 'com.github.machinarius:preferencefragment:0.1.1'
