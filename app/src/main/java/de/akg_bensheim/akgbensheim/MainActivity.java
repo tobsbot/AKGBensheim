@@ -92,9 +92,15 @@ public class MainActivity extends ActionBarActivity
 
         /* Set up webView */
         webView.setWebViewClient(new WebViewClient() {
+            @Override
             public void onPageFinished(WebView view, String url) {
                 swipeRefreshLayout.setRefreshing(false);
                 spinner.setEnabled(true);
+            }
+
+            @Override
+            public boolean shouldOverrideUrlLoading(WebView view, String url) {
+                return !url.startsWith("#");
             }
         });
 
