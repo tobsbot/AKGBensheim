@@ -1,7 +1,5 @@
 # AKG Bensheim
-A gradle-only port of the AKGApp created by averageapps.
-
-*Note to non-German-speakers who might land here and wonder what this is:
-Sorry that the texts are in German, but this is just a small and very specific Android app for a German school named AKG.*
+A gradle-only and material design port of the AKGApp created by averageapps: 
+https://github.com/averageapps/AKGApp and published under the MIT Licence: https://github.com/P0T4T0x/AKGBensheim/master/LICENCE
 
 **This project is associated with a german school called 'AKG Bensheim' and has nothing to do with AKG Acoustics.**
