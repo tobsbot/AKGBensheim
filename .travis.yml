@@ -40,7 +40,7 @@ android:
         - android-21
 
         # Emulator image
-        - sys-img-armeabi-v7a-android-21
+        - sys-img-$ANDROID_ABI-$ANDROID_TARGET
 
     licenses:
         - 'android-sdk-license-.+'
