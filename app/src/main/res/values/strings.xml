@@ -10,4 +10,15 @@
     <string name="option_this_week">This week</string>
     <string name="action_homepage">Homepage</string>
     <string name="last_modification">\'Last modified on \'EEEE\', at \'HH:mm\'.\'</string>
+    <string name="pref_about">About</string>
+    <string name="pref_data_usage">Data usage</string>
+    <string name="pref_force_load">Force load</string>
+    <string name="pref_licence">Licence</string>
+    <string name="pref_only_wifi">Only via wifi</string>
+    <string name="pref_summary_force_load">Forces to refresh, even if not neccessary</string>
+    <string name="pref_summary_licence">Show Licence Agreements</string>
+    <string name="pref_summary_only_wifi">Only refresh via wifi to save costs</string>
+    <string name="pref_version">AKG Bensheim</string>
+    <string name="pref_website">AKG Homepage</string>
+    <string name="dialog_title_licence">Licence</string>
 </resources>

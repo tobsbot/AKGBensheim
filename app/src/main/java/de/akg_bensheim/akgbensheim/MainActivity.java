@@ -1,8 +1,10 @@
 package de.akg_bensheim.akgbensheim;
 
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
@@ -28,7 +30,8 @@ import java.util.Date;
 import java.util.Locale;
 
 import de.akg_bensheim.akgbensheim.adapter.ToolBarSpinnerAdapter;
-import de.akg_bensheim.akgbensheim.net.ConnectionDetector;
+import de.akg_bensheim.akgbensheim.preferences.SettingsActivity;
+import de.akg_bensheim.akgbensheim.utils.ConnectionDetector;
 
 public class MainActivity extends ActionBarActivity
         implements Spinner.OnItemSelectedListener, SwipeRefreshLayout.OnRefreshListener {
@@ -117,14 +120,17 @@ public class MainActivity extends ActionBarActivity
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
+        switch (item.getItemId()) {
+            case R.id.action_settings:
+                startActivity(
+                        new Intent(MainActivity.this, SettingsActivity.class)
+                );
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
         }
-
-        return super.onOptionsItemSelected(item);
     }
 
     @Override
@@ -155,13 +161,14 @@ public class MainActivity extends ActionBarActivity
     }
 
     @Override
-    public void onRestoreInstanceState(Bundle inState) {
+    public void onRestoreInstanceState(@NonNull Bundle inState) {
         super.onRestoreInstanceState(inState);
         webView.restoreState(inState);
+        webView.zoomOut();
     }
 
     @Override
-    public void onSaveInstanceState(Bundle outState) {
+    public void onSaveInstanceState(@NonNull Bundle outState) {
         super.onSaveInstanceState(outState);
         webView.saveState(outState);
         outState.putInt(KEY_SELECTED_INDEX, selectedIndex);
@@ -201,7 +208,7 @@ public class MainActivity extends ActionBarActivity
 
     @Override
     public void onRefresh() {
-        if(ConnectionDetector.getInstance(getApplicationContext()).allowedToUseConnection(""))
+        if(ConnectionDetector.getInstance(getApplicationContext()).allowedToUseConnection("pref_key_only_wifi"))
            new Loader().execute(
                    String.format(URL_FIXED, week)
            );

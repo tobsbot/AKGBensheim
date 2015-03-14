@@ -9,4 +9,17 @@
     <string name="option_this_week">Diese Woche</string>
     <string name="action_homepage">Website</string>
     <string name="last_modification">\'Zuletzt geändert am \'EEEE\', um \'HH:mm\' Uhr.\'</string>
+
+    <!-- PreferenceFragment items-->
+    <string name="pref_data_usage">Datenverbrauch</string>
+    <string name="pref_only_wifi">Nur über WLAN</string>
+    <string name="pref_summary_only_wifi">Lädt Dateien nur über Wifi herunter. Es können somit keine zusätzlichen Kosten durch den Mobilfunkanbieter entstehen</string>
+    <string name="pref_force_load">Laden erzwingen</string>
+    <string name="pref_summary_force_load">Lädt Dateien beim aktualisieren immer herunter, auch wenn dies nicht nötig ist.</string>
+
+    <string name="pref_about">Über</string>
+    <string name="pref_website">AKG Website</string>
+    <string name="pref_licence">Lizenzen</string>
+    <string name="pref_summary_licence">Rechtliche Hinweise zu Lizenzen</string>
+    <string name="pref_version">AKG Bensheim</string>
 </resources>
