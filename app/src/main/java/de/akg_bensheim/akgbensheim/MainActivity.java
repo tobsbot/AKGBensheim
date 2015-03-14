@@ -37,7 +37,7 @@ public class MainActivity extends ActionBarActivity
         implements Spinner.OnItemSelectedListener, SwipeRefreshLayout.OnRefreshListener {
 
     private static final String KEY_SELECTED_INDEX = "selected_index";
-    private static final String URL_FIXED= "http://www.akg-bensheim.de/akgweb2011/content/Vertretung/w/%02d/w00000.htm";
+    private static final String URL_FIXED = "http://www.akg-bensheim.de/akgweb2011/content/Vertretung/w/%02d/w00000.htm";
 
     private int selectedIndex = 0;
     private boolean fromSavedInstanceState;
@@ -127,8 +127,6 @@ public class MainActivity extends ActionBarActivity
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
-
-        //noinspection SimplifiableIfStatement
         switch (item.getItemId()) {
             case R.id.action_settings:
                 startActivity(
@@ -201,9 +199,11 @@ public class MainActivity extends ActionBarActivity
                 break;
         }
 
-        new Loader().execute(
-                String.format(URL_FIXED, week)
-        );
+        if(ConnectionDetector.getInstance(getApplicationContext())
+                .allowedToUseConnection("pref_key_only_wifi"))
+            new Loader().execute(
+                    String.format(URL_FIXED, week)
+            );
     }
 
     @Override
@@ -213,7 +213,8 @@ public class MainActivity extends ActionBarActivity
 
     @Override
     public void onRefresh() {
-        if(ConnectionDetector.getInstance(getApplicationContext()).allowedToUseConnection("pref_key_only_wifi"))
+        if(ConnectionDetector.getInstance(getApplicationContext())
+                .allowedToUseConnection("pref_key_only_wifi"))
            new Loader().execute(
                    String.format(URL_FIXED, week)
            );
@@ -239,6 +240,7 @@ public class MainActivity extends ActionBarActivity
         private static final String CODE_301 = "file:///android_asset/error/301.html";
         private static final String CODE_404 = "file:///android_asset/error/404.html";
         private static final String CODE_1 = "file:///android_asset/error/offline.html";
+        private static final String CODE_UNKNOWN = "file:///android_asset/error/unknown.html";
 
         @Override
         protected void onPreExecute() {
@@ -264,7 +266,7 @@ public class MainActivity extends ActionBarActivity
                 connection.disconnect();
             } catch (IOException e) {
                 Log.e("Loader", "IOException occurred while connecting to: \"" + url + "\"", e);
-                response.code = -1;
+                response.code = 1;
             }
             return response;
         }
@@ -289,14 +291,11 @@ public class MainActivity extends ActionBarActivity
                 case 404:
                     webView.loadUrl(CODE_404);
                     break;
-                case -1:
+                case 1:
                     webView.loadUrl(CODE_1);
                     break;
                 default:
-                    String customHtml = "<html><body><font size=6>Unbekannter Fehler. Code: "
-                            + response.code
-                            + "<br>Bitte Entwickler kontaktieren und Code mitteilen.</font></body></html>";
-                    webView.loadData(customHtml, "text/html", "UTF-8");
+                    webView.loadUrl(CODE_UNKNOWN);
                     break;
             }
         }
