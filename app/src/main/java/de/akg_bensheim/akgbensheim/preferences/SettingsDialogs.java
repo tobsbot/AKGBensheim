@@ -50,7 +50,7 @@ public class SettingsDialogs {
             View rootView = layoutInflater.inflate(R.layout.dialog_layout_licence, null);
 
             TextView aboutBodyView = (TextView) rootView.findViewById(R.id.dialog_view_body_licence);
-            aboutBodyView.setText(Html.fromHtml(FileUtils.readRawTextFile(getActivity(), R.raw.licence)));
+            aboutBodyView.setText(Html.fromHtml(FileUtils.readAssetsTextFile(getActivity(), "licence.html")));
             aboutBodyView.setMovementMethod(new LinkMovementMethod());
 
             return new AlertDialog.Builder(getActivity())

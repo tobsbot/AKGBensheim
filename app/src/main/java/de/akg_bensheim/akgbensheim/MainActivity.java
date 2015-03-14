@@ -164,7 +164,12 @@ public class MainActivity extends ActionBarActivity
     public void onRestoreInstanceState(@NonNull Bundle inState) {
         super.onRestoreInstanceState(inState);
         webView.restoreState(inState);
-        webView.zoomOut();
+        webView.post(new Runnable() {
+            @Override
+            public void run() {
+                webView.zoomOut();
+            }
+        });
     }
 
     @Override

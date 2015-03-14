@@ -5,28 +5,48 @@ import android.util.Log;
 
 import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 
 /**
  * Created by tobiaserthal on 14.03.15.
  */
 public class FileUtils {
-    public static String readRawTextFile(Context context, int resId) {
-        InputStreamReader inputStreamReader = new InputStreamReader(context.getResources().openRawResource(resId));
+    public static String readStreamToString(InputStream inputStream) throws IOException {
+        InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
         BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
-        String line;
-        StringBuilder text = new StringBuilder("");
 
+        StringBuilder text = new StringBuilder();
+
+        String line;
+        while ((line = bufferedReader.readLine()) != null)
+            text.append(line).append('\n');
+
+        bufferedReader.close();
+        inputStreamReader.close();
+
+        return text.toString();
+    }
+
+    public static String readRawTextFile(Context context, int resId) {
+        String returnString;
         try {
-            while (( line = bufferedReader.readLine()) != null) {
-                text.append(line);
-                text.append('\n');
-            }
-            bufferedReader.close();
-            inputStreamReader.close();
+            returnString = readStreamToString(context.getResources().openRawResource(resId));
         } catch (IOException e) {
+            returnString = "";
             Log.e("FileUtils", "IOException occurred while trying to read resource with id: " + resId + "!", e);
         }
-        return text.toString();
+        return returnString;
+    }
+
+    public static String readAssetsTextFile(Context context, String path) {
+        String returnString;
+        try {
+            returnString = readStreamToString(context.getAssets().open(path));
+        } catch (IOException e) {
+            returnString = "";
+            Log.e("FileUtils", "IOException occurred while trying to read asset with path: " + path + "!", e);
+        }
+        return returnString;
     }
 }
