@@ -1,6 +1,6 @@
 # AKG Bensheim [![Build Status](https://travis-ci.org/P0T4T0x/AKGBensheim.svg?branch=master)](https://travis-ci.org/P0T4T0x/AKGBensheim)
 A gradle-only and material design port of the AKGApp created by averageapps: 
-https://github.com/averageapps/AKGApp and published under the MIT Licence: https://github.com/P0T4T0x/AKGBensheim/master/LICENCE
+https://github.com/averageapps/AKGApp and published under the MIT Licence: https://github.com/P0T4T0x/AKGBensheim/blob/master/LICENCE
 
 ## Releases
 A pre release is available here: https://github.com/P0T4T0x/AKGBensheim/releases/tag/v1.0-beta.1
