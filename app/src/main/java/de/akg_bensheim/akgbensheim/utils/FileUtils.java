@@ -1,6 +1,7 @@
 package de.akg_bensheim.akgbensheim.utils;
 
 import android.content.Context;
+import android.util.Log;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -33,7 +34,7 @@ public class FileUtils {
             returnString = readStreamToString(context.getResources().openRawResource(resId));
         } catch (IOException e) {
             returnString = "";
-            //Log.e("FileUtils", "IOException occurred while trying to read resource with id: " + resId + "!", e);
+            Log.e("FileUtils", "IOException occurred while trying to read resource with id: " + resId + "!", e);
         }
         return returnString;
     }
@@ -44,7 +45,7 @@ public class FileUtils {
             returnString = readStreamToString(context.getAssets().open(path));
         } catch (IOException e) {
             returnString = "";
-            //Log.e("FileUtils", "IOException occurred while trying to read asset with path: " + path + "!", e);
+            Log.e("FileUtils", "IOException occurred while trying to read asset with path: " + path + "!", e);
         }
         return returnString;
     }
