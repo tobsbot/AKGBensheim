@@ -4,7 +4,7 @@ https://github.com/averageapps/AKGApp and published under the MIT Licence: https
 
 ## Releases
 A pre release is available here: https://github.com/P0T4T0x/AKGBensheim/releases/tag/v1.0-beta.2
-Please note that you might have to disable apk checking on your phone, because this apk is **not** signed.
+Please note that you might have to disable apk checking on your phone.
 
 ## Notes
 **This project is associated with a german school called 'AKG Bensheim' and has nothing to do with AKG Acoustics.**
