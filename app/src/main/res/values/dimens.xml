@@ -9,7 +9,6 @@
     <dimen name="action_bar_subtitle_bottom_margin">5dp</dimen>
     <dimen name="action_bar_spinner_view_padding">5dp</dimen>
     <dimen name="action_bar_spinner_icon_padding">24dp</dimen>
-    <dimen name="action_bar_spinner_horizontal_offset">12dp</dimen>
     <dimen name="action_bar_spinner_vertical_offset">-52dp</dimen>
     <dimen name="preference_fragment_margin">@dimen/activity_horizontal_margin</dimen>
 </resources>
