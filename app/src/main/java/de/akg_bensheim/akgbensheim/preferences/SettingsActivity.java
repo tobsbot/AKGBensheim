@@ -8,7 +8,7 @@ import android.view.MenuItem;
 import de.akg_bensheim.akgbensheim.R;
 
 /**
- * Created by tobiaserthal on 13.03.15.
+ * Activity to display the settings fragment
  */
 public class SettingsActivity extends ActionBarActivity {
 

@@ -9,7 +9,6 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -186,7 +185,7 @@ public class MainActivity extends ActionBarActivity
 
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-        Log.d("MainActivity", "Spinner item at index: " + position + " selected.");
+        //Log.d("MainActivity", "Spinner item at index: " + position + " selected.");
 
         if(fromSavedInstanceState) {
             fromSavedInstanceState = false;
@@ -214,7 +213,7 @@ public class MainActivity extends ActionBarActivity
 
     @Override
     public void onNothingSelected(AdapterView<?> parent) {
-        Log.d("MainActivity", "No spinner item item selected.");
+        //Log.d("MainActivity", "No spinner item item selected.");
     }
 
     @Override
@@ -250,7 +249,7 @@ public class MainActivity extends ActionBarActivity
 
         @Override
         protected void onPreExecute() {
-            Log.d("MainActivity", "Starting Loader...");
+            //Log.d("MainActivity", "Starting Loader...");
             swipeRefreshLayout.setRefreshing(true);
             spinner.setEnabled(false);
         }
@@ -271,7 +270,7 @@ public class MainActivity extends ActionBarActivity
                 response.lastModified = connection.getLastModified();
                 connection.disconnect();
             } catch (IOException e) {
-                Log.e("Loader", "IOException occurred while connecting to: \"" + url + "\"", e);
+                //Log.e("Loader", "IOException occurred while connecting to: \"" + url + "\"", e);
                 response.code = 1;
             }
             return response;
@@ -279,7 +278,7 @@ public class MainActivity extends ActionBarActivity
 
         @Override
         protected void onPostExecute(Loader.Response response) {
-            Log.d("MainActivity", "Loader finished with result: " + response.toString());
+            //Log.d("MainActivity", "Loader finished with result: " + response.toString());
             switch (response.code) {
                 case 200:
                     webView.loadUrl(url);
