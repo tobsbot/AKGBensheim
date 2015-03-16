@@ -210,6 +210,8 @@ public class MainActivity extends ActionBarActivity
             new Loader().execute(
                     String.format(URL_FIXED, week)
             );
+        else
+            webView.loadUrl(Loader.CODE_1);
     }
 
     @Override
