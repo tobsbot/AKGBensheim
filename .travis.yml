@@ -38,6 +38,10 @@ android:
 
         # The SDK version used to compile your project
         - android-22
+        
+        # Support Library and repositories
+        - extra-android-m2repository
+        - extra-android-support
 
         # Emulator image
         - sys-img-$ANDROID_ABI-$ANDROID_TARGET
