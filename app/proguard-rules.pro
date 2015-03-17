@@ -8,7 +8,6 @@
 #   http://developer.android.com/guide/developing/tools/proguard.html
 #
 # Add any project specific keep options here:
-
 #-keep class android.support.v4.app.** { *; }
 #-keep interface android.support.v4.app.** { *; }
 #-keep class android.support.v7.** { *; }
