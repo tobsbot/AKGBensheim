@@ -1,5 +1,6 @@
 package de.akg_bensheim.akgbensheim;
 
+import android.annotation.TargetApi;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Build;
@@ -47,6 +48,7 @@ public class MainActivity extends ActionBarActivity
     private Spinner spinner;
     private WebView webView;
 
+    @TargetApi(11)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
