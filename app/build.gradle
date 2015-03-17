@@ -35,5 +35,7 @@ dependencies {
     //support libraries
     compile 'com.android.support:appcompat-v7:22.0.0'
     compile 'com.android.support:support-v4:22.0.0'
-    compile 'com.github.machinarius:preferencefragment:0.1.1'
+    compile ("com.github.machinarius:preferencefragment:0.1.1") {
+        exclude group: 'com.android.support'
+    }
 }
