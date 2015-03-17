@@ -9,10 +9,10 @@
 #
 # Add any project specific keep options here:
 
--keep class android.support.v4.app.** { *; }
--keep interface android.support.v4.app.** { *; }
--keep class android.support.v7.** { *; }
--keep interface android.support.v7.** { *; }
+#-keep class android.support.v4.app.** { *; }
+#-keep interface android.support.v4.app.** { *; }
+#-keep class android.support.v7.** { *; }
+#-keep interface android.support.v7.** { *; }
 
 # remove log calls
 -assumenosideeffects class android.util.Log {
