@@ -14,7 +14,8 @@
         android:key="pref_key_about">
         <Preference
             android:key="pref_key_website"
-            android:title="@string/pref_website" />
+            android:title="@string/pref_website"
+            android:summary="@string/pref_summary_website" />
         <Preference
             android:key="pref_key_licence"
             android:title="@string/pref_licence"

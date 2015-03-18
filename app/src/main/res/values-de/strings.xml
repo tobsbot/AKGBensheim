@@ -20,6 +20,6 @@
     <string name="pref_licence">Lizenzen</string>
     <string name="pref_summary_licence">Rechtliche Hinweise zu Lizenzen</string>
     <string name="pref_version">@string/app_name</string>
-    <string name="pref_summary_version">Version %s</string>
     <string name="dialog_title_licence">Lizenzen</string>
+    <string name="pref_summary_website">Öffnet die Website im Browser</string>
 </resources>

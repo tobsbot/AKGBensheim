@@ -1,13 +1,13 @@
 package de.akg_bensheim.akgbensheim.preferences;
+
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.preference.Preference;
-import android.util.Log;
 
 import com.github.machinarius.preferencefragment.PreferenceFragment;
 
+import de.akg_bensheim.akgbensheim.BuildConfig;
 import de.akg_bensheim.akgbensheim.R;
 import de.akg_bensheim.akgbensheim.utils.ConnectionDetector;
 
@@ -42,17 +42,14 @@ public class SettingsFragment extends PreferenceFragment{
         });
 
         Preference pref_about = findPreference("pref_key_version");
-        try {
-            pref_about.setSummary(
-                    String.format(
-                            getResources().getString(R.string.pref_summary_version),
-                            getActivity().getPackageManager().getPackageInfo(getActivity().getPackageName(), 0).versionName
-                    )
-            );
-        } catch (PackageManager.NameNotFoundException e) {
-            Log.e("SettingsFragment", "Unable to resolve package name", e);
-            e.printStackTrace();
-        }
+        pref_about.setSummary(
+                getResources().getString(
+                        R.string.pref_summary_version,
+                        BuildConfig.VERSION_NAME,
+                        BuildConfig.BUILD_TYPE,
+                        BuildConfig.VERSION_CODE
+                )
+        );
 
         Preference pref_only_wifi = findPreference("pref_key_only_wifi");
         pref_only_wifi.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
