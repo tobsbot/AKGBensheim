@@ -5,7 +5,7 @@ https://github.com/averageapps/AKGApp and published under the MIT Licence: https
 ## Releases
 - **Pre-Releases**  
 Pre-Releases were removed from GitHub and are only available on the Google PlayStore Testing platform.  
-If you want to join the testing program, please send a request with your ``@gmail.com`` adress to android@akgbensheim.de
+If you want to join the testing program, please send a request with your ``@gmail.com`` address to android@akgbensheim.de
 
 - **Production-Releases**  
 Production-Releases will be available on Google PlayStore and GitHub once the app is stable enough.
