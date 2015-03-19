@@ -27,6 +27,7 @@ public class FileUtils {
         return text.toString();
     }
 
+    @SuppressWarnings("unused")
     public static String readRawTextFile(Context context, int resId) {
         String returnString;
         try {

@@ -41,15 +41,15 @@ public class ConnectionDetector {
 
     /**
      * Determines whether the current device is connected to the Internet
-     * @return
+     * @return <ul><li>true: Device is connected</li><li>false: Device is not connected</li></ul>
      */
     public boolean isInternetConnected() {
         connectivity = (ConnectivityManager) this.context.getSystemService(Context.CONNECTIVITY_SERVICE);
         if (connectivity != null) {
             NetworkInfo[] info = connectivity.getAllNetworkInfo();
             if (info != null)
-                for (int i = 0; i < info.length; i++) {
-                    if (info[i].getState() == NetworkInfo.State.CONNECTED) {
+                for (NetworkInfo anInfo : info) {
+                    if (anInfo.getState() == NetworkInfo.State.CONNECTED) {
                         return true;
                     }
                 }

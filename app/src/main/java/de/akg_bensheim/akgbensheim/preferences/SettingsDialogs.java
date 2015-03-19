@@ -1,6 +1,7 @@
 package de.akg_bensheim.akgbensheim.preferences;
 
 
+import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
@@ -47,7 +48,9 @@ public class SettingsDialogs {
         @Override
         public Dialog onCreateDialog(Bundle savedInstanceState) {
             LayoutInflater layoutInflater = getActivity().getLayoutInflater();
-            View rootView = layoutInflater.inflate(R.layout.dialog_layout_licence, null);
+
+            @SuppressLint("InflateParams")
+                View rootView = layoutInflater.inflate(R.layout.dialog_layout_licence, null);
 
             TextView aboutBodyView = (TextView) rootView.findViewById(R.id.dialog_view_body_licence);
             aboutBodyView.setText(Html.fromHtml(FileUtils.readAssetsTextFile(getActivity(), "licence.html")));
