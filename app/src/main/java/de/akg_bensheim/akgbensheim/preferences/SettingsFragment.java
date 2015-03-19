@@ -1,6 +1,7 @@
 package de.akg_bensheim.akgbensheim.preferences;
 
 import android.os.Bundle;
+import android.preference.CheckBoxPreference;
 import android.preference.Preference;
 
 import com.github.machinarius.preferencefragment.PreferenceFragment;
@@ -9,26 +10,22 @@ import de.akg_bensheim.akgbensheim.BuildConfig;
 import de.akg_bensheim.akgbensheim.R;
 import de.akg_bensheim.akgbensheim.utils.ConnectionDetector;
 
-public class SettingsFragment extends PreferenceFragment{
-    private Preference pref_website;
+public class SettingsFragment extends PreferenceFragment
+        implements Preference.OnPreferenceChangeListener, Preference.OnPreferenceClickListener {
+
+    private CheckBoxPreference pref_website;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         addPreferencesFromResource(R.xml.preferences);
 
-        pref_website = findPreference("pref_key_website");
+        pref_website = (CheckBoxPreference) getPreferenceManager().findPreference("pref_key_website");
         pref_website.setEnabled(ConnectionDetector.getInstance(getActivity())
                 .allowedToUseConnection("pref_key_only_wifi"));
 
-        Preference pref_licence = findPreference("pref_key_licence");
-        pref_licence.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
-            @Override
-            public boolean onPreferenceClick(Preference preference) {
-                SettingsDialogs.showLicence(getActivity());
-                return true;
-            }
-        });
+        findPreference("pref_key_licence").setOnPreferenceClickListener(this);
+        findPreference("pref_key_only_wifi").setOnPreferenceChangeListener(this);
 
         Preference pref_about = findPreference("pref_key_version");
         pref_about.setSummary(
@@ -39,16 +36,28 @@ public class SettingsFragment extends PreferenceFragment{
                         BuildConfig.VERSION_CODE
                 )
         );
+    }
 
-        Preference pref_only_wifi = findPreference("pref_key_only_wifi");
-        pref_only_wifi.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
-
-            @Override
-            public boolean onPreferenceChange(Preference preference, Object newValue) {
+    @Override
+    public boolean onPreferenceChange(Preference preference, Object newValue) {
+        switch (preference.getKey()) {
+            case "pref_key_only_wifi":
                 pref_website.setEnabled(ConnectionDetector.getInstance(getActivity())
                         .allowedToUseConnection("pref_key_only_wifi"));
                 return true;
-            }
-        });
+            default:
+                return false;
+        }
+    }
+
+    @Override
+    public boolean onPreferenceClick(Preference preference) {
+        switch (preference.getKey()) {
+            case "pref_key_licence":
+                SettingsDialogs.showLicence(getActivity());
+                return true;
+            default:
+                return false;
+        }
     }
 }
