@@ -5,7 +5,6 @@ import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.preference.PreferenceManager;
-import android.util.Log;
 
 /**
  * A simple class for checking network states.
@@ -72,7 +71,7 @@ public class ConnectionDetector {
         try {
             return activeNetwork.getType() == ConnectivityManager.TYPE_WIFI;
         } catch(Exception e) {
-            Log.e("ConnectionDetector", "Error while trying to find out connection type. returning 'false'.", e);
+            Log.e("ConnectionDetector", e, "Error while trying to find out connection type. returning 'false'.");
             return false;
         }
     }

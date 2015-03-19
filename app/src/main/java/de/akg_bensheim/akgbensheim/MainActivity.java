@@ -10,7 +10,6 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -33,6 +32,7 @@ import java.util.Locale;
 import de.akg_bensheim.akgbensheim.adapter.ToolBarSpinnerAdapter;
 import de.akg_bensheim.akgbensheim.preferences.SettingsActivity;
 import de.akg_bensheim.akgbensheim.utils.ConnectionDetector;
+import de.akg_bensheim.akgbensheim.utils.Log;
 
 public class MainActivity extends ActionBarActivity
         implements Spinner.OnItemSelectedListener, SwipeRefreshLayout.OnRefreshListener {
@@ -188,7 +188,7 @@ public class MainActivity extends ActionBarActivity
 
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-        Log.d("MainActivity", "Spinner item at index: " + position + " selected.");
+        Log.d("MainActivity", "Spinner item at index: %i selected.", position);
 
         if(fromSavedInstanceState) {
             fromSavedInstanceState = false;
@@ -275,7 +275,7 @@ public class MainActivity extends ActionBarActivity
                 response.lastModified = connection.getLastModified();
                 connection.disconnect();
             } catch (IOException e) {
-                Log.e("Loader", "IOException occurred while connecting to: \"" + url + "\"", e);
+                Log.e("Loader", e, "IOException occurred while connecting to: \"%s\"", url);
                 response.code = 1;
             }
             return response;
@@ -283,7 +283,7 @@ public class MainActivity extends ActionBarActivity
 
         @Override
         protected void onPostExecute(Loader.Response response) {
-            Log.d("MainActivity", "Loader finished with result: " + response.toString());
+            Log.d("MainActivity", "Loader finished with result: %s", response.toString());
             switch (response.code) {
                 case 200:
                     webView.loadUrl(url);

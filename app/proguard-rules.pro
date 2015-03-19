@@ -8,13 +8,26 @@
 #   http://developer.android.com/guide/developing/tools/proguard.html
 #
 # Add any project specific keep options here:
-#-keep class android.support.v4.app.** { *; }
-#-keep interface android.support.v4.app.** { *; }
-#-keep class android.support.v7.** { *; }
-#-keep interface android.support.v7.** { *; }
+# -keep class android.support.v4.app.** { *; }
+# -keep interface android.support.v4.app.** { *; }
+# -keep class android.support.v7.** { *; }
+# -keep interface android.support.v7.** { *; }
 
-# remove log calls
+# print config
+-printconfiguration
+
+# remove log calls to android log
 -assumenosideeffects class android.util.Log {
+    public static boolean isLoggable(java.lang.String, int);
+    public static int v(...);
+    public static int i(...);
+    public static int w(...);
+    public static int d(...);
+    public static int e(...);
+}
+
+# remove log calls to log wrapper
+-assumenosideeffects class de.akg_bensheim.akgbensheim.utils.Log {
     public static boolean isLoggable(java.lang.String, int);
     public static int v(...);
     public static int i(...);

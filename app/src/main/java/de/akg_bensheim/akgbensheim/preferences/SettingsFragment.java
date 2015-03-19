@@ -1,7 +1,5 @@
 package de.akg_bensheim.akgbensheim.preferences;
 
-import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.preference.Preference;
 
@@ -22,15 +20,6 @@ public class SettingsFragment extends PreferenceFragment{
         pref_website = findPreference("pref_key_website");
         pref_website.setEnabled(ConnectionDetector.getInstance(getActivity())
                 .allowedToUseConnection("pref_key_only_wifi"));
-        pref_website.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
-            @Override
-            public boolean onPreferenceClick(Preference preference) {
-                Intent webIntent = new Intent("android.intent.action.VIEW",
-                        Uri.parse("http://www.akg-bensheim.de"));
-                startActivity(webIntent);
-                return true;
-            }
-        });
 
         Preference pref_licence = findPreference("pref_key_licence");
         pref_licence.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
