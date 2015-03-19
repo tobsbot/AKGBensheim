@@ -188,7 +188,7 @@ public class MainActivity extends ActionBarActivity
 
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-        Log.d("MainActivity", "Spinner item at index: %i selected.", position);
+        Log.d("MainActivity", "Spinner item at index: %d selected.", position);
 
         if(fromSavedInstanceState) {
             fromSavedInstanceState = false;

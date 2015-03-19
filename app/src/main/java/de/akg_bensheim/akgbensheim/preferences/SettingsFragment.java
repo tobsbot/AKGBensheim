@@ -1,7 +1,6 @@
 package de.akg_bensheim.akgbensheim.preferences;
 
 import android.os.Bundle;
-import android.preference.CheckBoxPreference;
 import android.preference.Preference;
 
 import com.github.machinarius.preferencefragment.PreferenceFragment;
@@ -13,14 +12,14 @@ import de.akg_bensheim.akgbensheim.utils.ConnectionDetector;
 public class SettingsFragment extends PreferenceFragment
         implements Preference.OnPreferenceChangeListener, Preference.OnPreferenceClickListener {
 
-    private CheckBoxPreference pref_website;
+    private Preference pref_website;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         addPreferencesFromResource(R.xml.preferences);
 
-        pref_website = (CheckBoxPreference) getPreferenceManager().findPreference("pref_key_website");
+        pref_website = getPreferenceManager().findPreference("pref_key_website");
         pref_website.setEnabled(ConnectionDetector.getInstance(getActivity())
                 .allowedToUseConnection("pref_key_only_wifi"));
 

@@ -34,7 +34,7 @@ public class FileUtils {
             returnString = readStreamToString(context.getResources().openRawResource(resId));
         } catch (IOException e) {
             returnString = "";
-            Log.e("FileUtils", e,"IOException occurred while trying to read resource with id: %i!", resId);
+            Log.e("FileUtils", e,"IOException occurred while trying to read resource with id: %d!", resId);
         }
         return returnString;
     }
