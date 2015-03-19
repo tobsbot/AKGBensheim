@@ -14,24 +14,10 @@
 # -keep interface android.support.v7.** { *; }
 
 # print config
--printconfiguration
+-printconfiguration build/outputs/mapping/release/config.txt
 
 # remove log calls to android log
--assumenosideeffects class android.util.Log {
-    public static boolean isLoggable(java.lang.String, int);
-    public static int v(...);
-    public static int i(...);
-    public static int w(...);
-    public static int d(...);
-    public static int e(...);
-}
+-assumenosideeffects class android.util.Log { *; }
 
 # remove log calls to log wrapper
--assumenosideeffects class de.akg_bensheim.akgbensheim.utils.Log {
-    public static boolean isLoggable(java.lang.String, int);
-    public static int v(...);
-    public static int i(...);
-    public static int w(...);
-    public static int d(...);
-    public static int e(...);
-}
+-assumenosideeffects class de.akg_bensheim.akgbensheim.utils.Log { *; }
