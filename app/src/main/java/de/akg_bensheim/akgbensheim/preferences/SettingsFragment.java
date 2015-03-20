@@ -1,5 +1,6 @@
 package de.akg_bensheim.akgbensheim.preferences;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.preference.Preference;
 
@@ -11,7 +12,6 @@ import de.akg_bensheim.akgbensheim.utils.ConnectionDetector;
 
 public class SettingsFragment extends PreferenceFragment
         implements Preference.OnPreferenceChangeListener, Preference.OnPreferenceClickListener {
-
     private Preference pref_website;
 
     @Override
@@ -19,15 +19,15 @@ public class SettingsFragment extends PreferenceFragment
         super.onCreate(savedInstanceState);
         addPreferencesFromResource(R.xml.preferences);
 
-        pref_website = getPreferenceManager().findPreference("pref_key_website");
+        pref_website = getPreferenceManager().findPreference(Keys.WEBSITE);
         pref_website.setEnabled(ConnectionDetector.getInstance(getActivity())
-                .allowedToUseConnection("pref_key_only_wifi"));
+                .allowedToUseConnection(Keys.ONLY_WIFI));
 
-        findPreference("pref_key_licence").setOnPreferenceClickListener(this);
-        findPreference("pref_key_only_wifi").setOnPreferenceChangeListener(this);
+        findPreference(Keys.LICENCE).setOnPreferenceClickListener(this);
+        findPreference(Keys.CONTACT_SUPPORT).setOnPreferenceClickListener(this);
+        findPreference(Keys.ONLY_WIFI).setOnPreferenceChangeListener(this);
 
-        Preference pref_about = findPreference("pref_key_version");
-        pref_about.setSummary(
+        findPreference(Keys.VERSION).setSummary(
                 getResources().getString(
                         R.string.pref_summary_version,
                         BuildConfig.VERSION_NAME,
@@ -40,9 +40,9 @@ public class SettingsFragment extends PreferenceFragment
     @Override
     public boolean onPreferenceChange(Preference preference, Object newValue) {
         switch (preference.getKey()) {
-            case "pref_key_only_wifi":
+            case Keys.ONLY_WIFI:
                 pref_website.setEnabled(ConnectionDetector.getInstance(getActivity())
-                        .allowedToUseConnection("pref_key_only_wifi"));
+                        .allowedToUseConnection(Keys.ONLY_WIFI));
                 return true;
             default:
                 return false;
@@ -52,8 +52,21 @@ public class SettingsFragment extends PreferenceFragment
     @Override
     public boolean onPreferenceClick(Preference preference) {
         switch (preference.getKey()) {
-            case "pref_key_licence":
+            case Keys.LICENCE:
                 SettingsDialogs.showLicence(getActivity());
+                return true;
+            case Keys.CONTACT_SUPPORT:
+                Intent intent = new Intent(Intent.ACTION_SENDTO)
+                        .setType("text/plain")
+                        .putExtra(Intent.EXTRA_EMAIL,
+                                getResources().getString(R.string.app_developer_email))
+                        .putExtra(Intent.EXTRA_SUBJECT,
+                                getResources().getString(R.string.app_developer_email_subject));
+
+                startActivity(
+                        Intent.createChooser(intent,
+                                getResources().getString(R.string.pref_contact_support))
+                );
                 return true;
             default:
                 return false;

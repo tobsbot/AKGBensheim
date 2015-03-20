@@ -1,5 +1,6 @@
 <resources>
     <string name="app_name">AKG Bensheim</string>
+    <string name="app_developer_email" translatable="false">android@akgbensheim.de</string>
 
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
@@ -21,4 +22,8 @@
     <string name="dialog_title_licence">Licence</string>
     <string name="pref_summary_version" translatable="false">Version %1$s (%2$s build %3$d)</string>
     <string name="pref_summary_website">Opens the homepage in the browser</string>
+    <string name="pref_support" translatable="false">App Support</string>
+    <string name="pref_contact_support">Contact support</string>
+    <string name="pref_summary_contact_support">Send an email to the developer about this app</string>
+    <string name="app_developer_email_subject">AKG Android App supportrequest</string>
 </resources>

@@ -22,4 +22,7 @@
     <string name="pref_version">@string/app_name</string>
     <string name="dialog_title_licence">Lizenzen</string>
     <string name="pref_summary_website">Öffnet die Website im Browser</string>
+    <string name="pref_contact_support">Support kontaktieren</string>
+    <string name="pref_summary_contact_support">Eine Email bezüglich der App an den Entwickler senden</string>
+    <string name="app_developer_email_subject">AKG Android App Supportanfrage</string>
 </resources>

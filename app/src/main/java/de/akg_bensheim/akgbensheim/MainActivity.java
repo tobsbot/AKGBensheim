@@ -49,12 +49,8 @@ public class MainActivity extends ActionBarActivity
     private WebView webView;
 
     static {
-        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.FROYO) {
-            Log.w("MainActivity", "Unstable build for HTTP connections");
+        if(Build.VERSION.SDK_INT < Build.VERSION_CODES.FROYO)
             System.setProperty("http.keepAlive", "false");
-        } else {
-            Log.i("MainActivity", "Stable build for HTTP connections");
-        }
     }
 
     @TargetApi(11)
@@ -275,7 +271,7 @@ public class MainActivity extends ActionBarActivity
 
             try {
                 HttpURLConnection connection = (HttpURLConnection) new URL(url).openConnection();
-                connection.setConnectTimeout(1000);
+                connection.setConnectTimeout(2000);
                 connection.setRequestMethod("GET");
                 connection.setInstanceFollowRedirects(false);
                 connection.connect();
