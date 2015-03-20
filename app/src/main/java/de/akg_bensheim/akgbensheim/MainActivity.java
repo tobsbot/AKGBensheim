@@ -50,7 +50,10 @@ public class MainActivity extends ActionBarActivity
 
     static {
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.FROYO) {
+            Log.w("MainActivity", "Unstable build for HTTP connections");
             System.setProperty("http.keepAlive", "false");
+        } else {
+            Log.i("MainActivity", "Stable build for HTTP connections");
         }
     }
 
