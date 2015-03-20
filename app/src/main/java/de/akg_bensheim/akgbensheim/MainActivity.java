@@ -48,6 +48,12 @@ public class MainActivity extends ActionBarActivity
     private Spinner spinner;
     private WebView webView;
 
+    static {
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.FROYO) {
+            System.setProperty("http.keepAlive", "false");
+        }
+    }
+
     @TargetApi(11)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
