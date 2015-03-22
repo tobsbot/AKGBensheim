@@ -1,4 +1,4 @@
-package de.akg_bensheim.akgbensheim.utils;
+package de.tobiaserthal.akgbensheim.utils;
 
 import android.content.Context;
 import android.content.SharedPreferences;

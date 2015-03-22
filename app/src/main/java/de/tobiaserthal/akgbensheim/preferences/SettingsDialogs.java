@@ -1,4 +1,4 @@
-package de.akg_bensheim.akgbensheim.preferences;
+package de.tobiaserthal.akgbensheim.preferences;
 
 
 import android.annotation.SuppressLint;
@@ -18,8 +18,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.TextView;
 
-import de.akg_bensheim.akgbensheim.R;
-import de.akg_bensheim.akgbensheim.utils.FileUtils;
+import de.tobiaserthal.akgbensheim.R;
+import de.tobiaserthal.akgbensheim.utils.FileUtils;
 
 public class SettingsDialogs {
 

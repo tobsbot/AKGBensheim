@@ -1,4 +1,4 @@
-package de.akg_bensheim.akgbensheim.preferences;
+package de.tobiaserthal.akgbensheim.preferences;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -6,9 +6,9 @@ import android.preference.Preference;
 
 import com.github.machinarius.preferencefragment.PreferenceFragment;
 
-import de.akg_bensheim.akgbensheim.BuildConfig;
-import de.akg_bensheim.akgbensheim.R;
-import de.akg_bensheim.akgbensheim.utils.ConnectionDetector;
+import de.tobiaserthal.akgbensheim.BuildConfig;
+import de.tobiaserthal.akgbensheim.R;
+import de.tobiaserthal.akgbensheim.utils.ConnectionDetector;
 
 public class SettingsFragment extends PreferenceFragment
         implements Preference.OnPreferenceChangeListener, Preference.OnPreferenceClickListener {

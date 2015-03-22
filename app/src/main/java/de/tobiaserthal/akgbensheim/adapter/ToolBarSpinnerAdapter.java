@@ -1,4 +1,4 @@
-package de.akg_bensheim.akgbensheim.adapter;
+package de.tobiaserthal.akgbensheim.adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Locale;
 
-import de.akg_bensheim.akgbensheim.R;
+import de.tobiaserthal.akgbensheim.R;
 
 public class ToolBarSpinnerAdapter extends BaseAdapter{
 

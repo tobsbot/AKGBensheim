@@ -1,4 +1,4 @@
-package de.akg_bensheim.akgbensheim;
+package de.tobiaserthal.akgbensheim;
 
 import android.app.Application;
 import android.test.ApplicationTestCase;

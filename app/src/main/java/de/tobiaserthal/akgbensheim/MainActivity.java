@@ -1,4 +1,4 @@
-package de.akg_bensheim.akgbensheim;
+package de.tobiaserthal.akgbensheim;
 
 import android.annotation.TargetApi;
 import android.content.Intent;
@@ -29,10 +29,10 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 
-import de.akg_bensheim.akgbensheim.adapter.ToolBarSpinnerAdapter;
-import de.akg_bensheim.akgbensheim.preferences.SettingsActivity;
-import de.akg_bensheim.akgbensheim.utils.ConnectionDetector;
-import de.akg_bensheim.akgbensheim.utils.Log;
+import de.tobiaserthal.akgbensheim.adapter.ToolBarSpinnerAdapter;
+import de.tobiaserthal.akgbensheim.preferences.SettingsActivity;
+import de.tobiaserthal.akgbensheim.utils.ConnectionDetector;
+import de.tobiaserthal.akgbensheim.utils.Log;
 
 public class MainActivity extends ActionBarActivity
         implements Spinner.OnItemSelectedListener, SwipeRefreshLayout.OnRefreshListener {

@@ -1,4 +1,4 @@
-package de.akg_bensheim.akgbensheim.preferences;
+package de.tobiaserthal.akgbensheim.preferences;
 
 /**
  * The keys to access preferences

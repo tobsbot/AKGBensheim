@@ -6,7 +6,7 @@
     <!-- include the settings fragment in this activity -->
     <fragment
         android:id="@+id/fragment_settings"
-        android:name="de.akg_bensheim.akgbensheim.preferences.SettingsFragment"
+        android:name="de.tobiaserthal.akgbensheim.preferences.SettingsFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="?attr/actionBarSize"

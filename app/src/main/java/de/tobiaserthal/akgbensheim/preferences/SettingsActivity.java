@@ -1,11 +1,11 @@
-package de.akg_bensheim.akgbensheim.preferences;
+package de.tobiaserthal.akgbensheim.preferences;
 
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 
-import de.akg_bensheim.akgbensheim.R;
+import de.tobiaserthal.akgbensheim.R;
 
 /**
  * Activity to display the settings fragment

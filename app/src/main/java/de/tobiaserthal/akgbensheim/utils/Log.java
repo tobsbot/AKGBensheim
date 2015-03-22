@@ -1,4 +1,4 @@
-package de.akg_bensheim.akgbensheim.utils;
+package de.tobiaserthal.akgbensheim.utils;
 
 /**
  * A simple wrapper class tio improve logging style
