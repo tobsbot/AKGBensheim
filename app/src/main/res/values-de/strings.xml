@@ -2,12 +2,9 @@
 <resources>
     <string name="app_name">AKG Bensheim</string>
     <string name="action_settings">Einstellungen</string>
-    <string name="hello_world">Hallo Welt!</string>
-    <string name="action_about">Über</string>
     <string name="title_substitute">Vertretungsplan</string>
     <string name="option_next_week">Nächste Woche</string>
     <string name="option_this_week">Diese Woche</string>
-    <string name="action_homepage">Website</string>
     <string name="last_modification">\'Zuletzt geändert am \'EEEE\', um \'HH:mm\' Uhr.\'</string>
 
     <!-- PreferenceFragment items-->
@@ -19,7 +16,6 @@
     <string name="pref_website">AKG Website</string>
     <string name="pref_licence">Lizenzen</string>
     <string name="pref_summary_licence">Rechtliche Hinweise zu Lizenzen</string>
-    <string name="pref_version">@string/app_name</string>
     <string name="dialog_title_licence">Lizenzen</string>
     <string name="pref_summary_website">Öffnet die Website im Browser</string>
     <string name="pref_contact_support">Support kontaktieren</string>
