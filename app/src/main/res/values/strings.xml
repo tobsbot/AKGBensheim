@@ -21,4 +21,5 @@
     <string name="pref_contact_support">Contact support</string>
     <string name="pref_summary_contact_support">Send an email to the developer about this app</string>
     <string name="app_developer_email_subject">AKG Android App supportrequest</string>
+    <string name="no_email_clients_found">No email app installed!</string>
 </resources>

@@ -1,8 +1,10 @@
 package de.tobiaserthal.akgbensheim.preferences;
 
+import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.os.Bundle;
 import android.preference.Preference;
+import android.widget.Toast;
 
 import com.github.machinarius.preferencefragment.PreferenceFragment;
 
@@ -56,17 +58,23 @@ public class SettingsFragment extends PreferenceFragment
                 SettingsDialogs.showLicence(getActivity());
                 return true;
             case Keys.CONTACT_SUPPORT:
-                Intent intent = new Intent(Intent.ACTION_SENDTO)
-                        .setType("text/plain")
+                Intent intent = new Intent(Intent.ACTION_SEND)
+                        .setType("message/rfc822")
                         .putExtra(Intent.EXTRA_EMAIL,
-                                getResources().getString(R.string.app_developer_email))
+                                new String[] {getResources().getString(R.string.app_developer_email)})
                         .putExtra(Intent.EXTRA_SUBJECT,
                                 getResources().getString(R.string.app_developer_email_subject));
 
-                startActivity(
-                        Intent.createChooser(intent,
-                                getResources().getString(R.string.pref_contact_support))
-                );
+                try {
+                    startActivity(
+                            Intent.createChooser(intent,
+                                    getResources().getString(R.string.pref_contact_support))
+                    );
+                } catch (ActivityNotFoundException e) {
+                    Toast.makeText(getActivity(),
+                            getResources().getString(R.string.no_email_clients_found), Toast.LENGTH_SHORT
+                    ).show();
+                }
                 return true;
             default:
                 return false;
