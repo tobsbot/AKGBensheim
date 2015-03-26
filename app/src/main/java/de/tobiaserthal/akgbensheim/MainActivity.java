@@ -63,6 +63,11 @@ public class MainActivity extends ActionBarActivity
         if(savedInstanceState != null) {
             selectedIndex = savedInstanceState.getInt(KEY_SELECTED_INDEX, 0);
             fromSavedInstanceState = true;
+            Log.d("MainActivity", "Restored activity from instance state with index selected: %d", selectedIndex);
+        } else {
+            selectedIndex = getPreferredWeek();
+            fromSavedInstanceState = false;
+            Log.d("MainActivity", "New activity instance created with preferred index: %d", selectedIndex);
         }
 
         /* View id lookup */
@@ -126,6 +131,11 @@ public class MainActivity extends ActionBarActivity
                 webView.zoomOut();
             }
         });
+    }
+
+    private int getPreferredWeek() {
+        int day = Calendar.getInstance(Locale.getDefault()).get(Calendar.DAY_OF_WEEK);
+        return  (day == Calendar.SATURDAY || day == Calendar.SUNDAY) ? 1 : 0;
     }
 
     @Override
@@ -223,7 +233,7 @@ public class MainActivity extends ActionBarActivity
 
     @Override
     public void onNothingSelected(AdapterView<?> parent) {
-        Log.d("MainActivity", "No spinner item item selected.");
+        Log.w("MainActivity", "No spinner item item selected. Should not happen!");
     }
 
     @Override
@@ -259,7 +269,7 @@ public class MainActivity extends ActionBarActivity
 
         @Override
         protected void onPreExecute() {
-            Log.d("MainActivity", "Starting Loader...");
+            Log.d("MainActivity", "Starting asynchronous task \"Loader\"...");
             swipeRefreshLayout.setRefreshing(true);
             spinner.setEnabled(false);
         }
@@ -288,7 +298,7 @@ public class MainActivity extends ActionBarActivity
 
         @Override
         protected void onPostExecute(Loader.Response response) {
-            Log.d("MainActivity", "Loader finished with result: %s", response.toString());
+            Log.d("Loader", "Loader finished with result: %s", response.toString());
             switch (response.code) {
                 case 200:
                     webView.loadUrl(url);
