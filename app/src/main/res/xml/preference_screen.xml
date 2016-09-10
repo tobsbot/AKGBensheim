@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <PreferenceCategory android:title="@string/pref_category_subst">
+        <Preference
+            android:key="@string/pref_key_subst_phase"
+            android:title="@string/pref_title_subst_phase"/>
+        <Preference
+            android:key="@string/pref_key_subst_form"
+            android:title="@string/pref_title_subst_form" />
+        <Preference
+            android:key="@string/pref_key_subst_filterSettings"
+            android:title="@string/pref_title_subst_filterSettings" />
+        <Preference
+            android:key="@string/pref_key_subst_colorSettings"
+            android:title="@string/pref_title_subst_colorSettings"/>
+    </PreferenceCategory>
+
+    <!-- Sync section -->
+    <PreferenceCategory android:title="@string/pref_category_sync">
+        <CheckBoxPreference
+            android:key="@string/pref_key_sync_backgroundEnabled"
+            android:title="@string/pref_title_sync_backgroundEnabled"
+            android:summaryOn="@string/pref_summary_sync_backgroundEnabledOn"
+            android:summaryOff="@string/pref_summary_sync_backgroundEnabledOff"
+            android:widgetLayout="@layout/preference_switch_layout" />
+        <Preference
+            android:key="@string/pref_key_sync_advancedSettings"
+            android:title="@string/pref_title_sync_advancedSettings"
+            android:dependency="@string/pref_key_sync_backgroundEnabled"
+            android:shouldDisableView="true" />
+    </PreferenceCategory>
+
+    <!-- Data section -->
+    <PreferenceCategory android:title="@string/pref_category_data">
+        <CheckBoxPreference
+            android:key="@string/pref_key_data_onlyWifi"
+            android:title="@string/pref_title_data_onlyWifi"
+            android:summary="@string/pref_summary_data_onlyWifi"
+            android:widgetLayout="@layout/preference_switch_layout" />
+        <Preference
+            android:key="@string/pref_key_data_clearCache"
+            android:title="@string/pref_title_data_clearCache" />
+        <Preference
+            android:key="@string/pref_key_data_clearData"
+            android:title="@string/pref_title_data_clearData" />
+    </PreferenceCategory>
+
+    <!-- About section -->
+    <PreferenceCategory android:title="@string/pref_category_about">
+        <Preference
+            android:key="@string/pref_key_about_website"
+            android:title="@string/pref_title_about_website"
+            android:summary="@string/pref_summary_about_website">
+            <intent
+                android:action="android.intent.action.VIEW"
+                android:data="http://www.akg-bensheim.de" />
+        </Preference>
+        <Preference
+            android:key="@string/pref_key_about_licence"
+            android:title="@string/pref_title_about_licence"
+            android:summary="@string/pref_summary_licence" />
+        <Preference
+            android:key="@string/pref_key_about_version"
+            android:title="@string/pref_title_about_version"/>
+    </PreferenceCategory>
+
+    <!-- Support section -->
+    <PreferenceCategory android:title="@string/pref_category_support">
+        <Preference
+            android:key="@string/pref_key_support_mailDev"
+            android:title="@string/pref_title_support_mailDev"
+            android:summary="@string/pref_summary_support_mailDev" >
+            <intent
+                android:action="android.intent.action.VIEW"
+                android:data="@string/detail_body_emailDevAddress">
+                <extra android:name="android.intent.extra.SUBJECT"
+                    android:value="@string/detail_body_emailDevSubject" />
+            </intent>
+        </Preference>
+    </PreferenceCategory>
+</PreferenceScreen>

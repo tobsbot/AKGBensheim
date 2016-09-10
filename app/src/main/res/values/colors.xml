@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="dim_background">@android:color/black</color>
+
+    <color name="primary">#2196F3</color>
+    <color name="primaryDark">#1967D2</color>
+    <color name="accent">#FF4081</color>
+
+    <color name="primaryText">#212121</color>
+    <color name="primaryTextInverse">#FFFFFF</color>
+    <color name="secondaryText">#727272</color>
+    <color name="secondaryTextInverse">#B3FFFFFF</color>
+
+    <color name="insetsForeground">#44000000</color>
+    <color name="insetsForegroundInverse">#44FFFFFF</color>
+
+    <color name="pressed_gray">#0c000000</color>
+    <color name="selected_gray">#2c000000</color>
+    <color name="background_light">#eeeeee</color>
+    <color name="windowBackground">#EEEEEE</color>
+    <color name="image_background">#ff37474f</color>
+</resources>

@@ -1,26 +1,100 @@
-<?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="de.tobiaserthal.akgbensheim" >
-
-    <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    xmlns:tools="http://schemas.android.com/tools"
+    package="de.tobiaserthal.akgbensheim">
 
     <application
+        android:name=".AKGBensheim"
         android:allowBackup="true"
+        android:fullBackupContent="@xml/backup_scheme"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
-        android:theme="@style/AppTheme" >
+        android:theme="@style/AppTheme"
+        tools:ignore="UnusedAttribute">
+
         <activity
-            android:name="de.tobiaserthal.akgbensheim.MainActivity"
-            android:label="@string/app_name" >
+            android:name=".base.MainActivity"
+            android:label="@string/activity_title_main" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data android:scheme="http" android:host="www.akg-bensheim.de" android:pathPrefix="/termine"/>
+                <data android:scheme="http" android:host="www.akg-bensheim.de" android:pathPrefix="/kontakt"/>
+                <data android:scheme="http" android:host="www.akg-bensheim.de" android:pathPrefix="/aktuelles"/>
+                <data android:scheme="http" android:host="www.akg-bensheim.de" android:pathPrefix="/home/mensa-cafeteria"/>
+                <data android:scheme="http" android:host="www.akg-bensheim.de" android:pathPrefix="/home/wer-ist-wer/lehrer"/>
+                <data android:scheme="http" android:host="www.akg-bensheim.de" android:pathPrefix="/akgweb2011/content/Vertretung"/>
+                <data android:scheme="http" android:host="www.akg-bensheim.de" android:pathPrefix="/unterricht-co/vertretungsplan"/>
+
+            </intent-filter>
         </activity>
+
         <activity
-            android:name="de.tobiaserthal.akgbensheim.preferences.SettingsActivity"
-            android:label="@string/action_settings" >
+            android:name=".subst.SubstDetailActivity"
+            android:label="@string/activity_title_substDetail"
+            android:parentActivityName=".base.MainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="de.tobiaserthal.akgbensheim.base.MainActivity" />
+        </activity>
+
+        <activity
+            android:name=".news.NewsDetailActivity"
+            android:label="@string/activity_title_newsDetail"
+            android:parentActivityName=".base.MainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="de.tobiaserthal.akgbensheim.base.MainActivity" />
+        </activity>
+
+        <activity
+            android:name=".teacher.TeacherDetailActivity"
+            android:label="@string/activity_title_teachersDetail"
+            android:parentActivityName=".base.MainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="de.tobiaserthal.akgbensheim.base.MainActivity" />
+        </activity>
+
+        <activity
+            android:name=".homework.HomeworkEditActivity"
+            android:label="@string/activity_title_homeworkDetail"
+            android:parentActivityName=".base.MainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="de.tobiaserthal.akgbensheim.base.MainActivity" />
+        </activity>
+
+        <activity
+            android:name=".event.EventDetailActivity"
+            android:label="@string/activity_title_eventsDetail"
+            android:parentActivityName=".base.MainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="de.tobiaserthal.akgbensheim.base.MainActivity" />
+        </activity>
+
+        <activity
+            android:name=".preferences.SettingsActivity"
+            android:label="@string/activity_title_settings"
+            android:parentActivityName=".base.MainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="de.tobiaserthal.akgbensheim.base.MainActivity" />
+        </activity>
+
+        <activity
+            android:name=".contact.ContactActivity"
+            android:label="@string/activity_title_contact"
+            android:parentActivityName=".base.MainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="de.tobiaserthal.akgbensheim.base.MainActivity" />
         </activity>
     </application>
 
